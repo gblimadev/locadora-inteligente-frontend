@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Login() {
   return (
     <div className="login-page">
@@ -40,9 +42,9 @@ function Login() {
             Ainda não possui uma conta?
           </p>
 
-          <button className="register-button">
+          <Link to="/cadastro" className="register-button">
             Criar conta
-          </button>
+          </Link>
         </div>
 
       </div>

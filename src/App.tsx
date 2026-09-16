@@ -7,6 +7,7 @@ import Cars from './components/Cars'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import Login from './pages/Login'
+import Cadastro from './pages/Cadastro'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function Home() {
@@ -32,6 +33,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/login" element={<Login />} />
+
+        <Route path="/cadastro" element={<Cadastro />} />
 
       </Routes>
     </BrowserRouter>
