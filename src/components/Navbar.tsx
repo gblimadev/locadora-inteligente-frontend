@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 function Navbar() {
   return (
     <header className="navbar">
@@ -17,9 +19,9 @@ function Navbar() {
         <a href="#">Sobre nós</a>
       </nav>
 
-      <button className="login-button">
+      <Link to="/login" className="nav-button">
         Entrar
-      </button>
+      </Link>
 
     </header>
   )
