@@ -34,7 +34,8 @@ function Login() {
       })
 
       if (!resposta.ok) {
-        throw new Error('CPF ou senha inválidos')
+        setErro('CPF ou senha inválidos')
+        return
       }
 
       const dados = await resposta.json()
@@ -45,7 +46,8 @@ function Login() {
 
     } catch (error) {
 
-      setErro('CPF ou senha inválidos')
+      console.error(error)
+      setErro('Erro ao conectar com o servidor')
 
     } finally {
 
@@ -101,11 +103,20 @@ function Login() {
 
           </div>
 
-          {erro && (
-            <p className="login-error">
-              {erro}
-            </p>
-          )}
+            {erro && (
+              <p
+                className="login-error"
+                  style={{
+                    color: '#dc2626',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    textAlign: 'center',
+                    margin: '10px 0'
+                 }}
+                >
+                {erro}
+              </p>
+            )}
 
           <button
             type="submit"
