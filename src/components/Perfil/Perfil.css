@@ -1,0 +1,82 @@
+.perfil-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f5f7fa;
+}
+
+.perfil-card {
+  width: 100%;
+  max-width: 650px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.perfil-card h1 {
+  margin-bottom: 30px;
+  color: #111111;
+  text-align: center;
+}
+
+.perfil-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.campo input {
+  padding: 12px;
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+.campo input:focus {
+  border-color: #0066ff;
+}
+
+.btn-salvar {
+  width: 100%;
+  margin-top: 30px;
+  padding: 13px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0066ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-salvar:hover {
+  background-color: #0052cc;
+}
+
+@media (max-width: 600px) {
+  .perfil-card {
+    padding: 25px;
+  }
+
+  .perfil-info {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -10,6 +10,7 @@ import Cadastro from './pages/Cadastro'
 import HomePage from './components/homePages/HomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Perfil from './components/Perfil/Perfil'
 
 function Home() {
   return (
@@ -39,14 +40,25 @@ function App() {
 
         <Route path="/cadastro" element={<Cadastro />} />
 
+        <Route path="/perfil" element={<Perfil />} />
+
         <Route
           path="/home"
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
-          }
-        />
+            }
+          />
+
+          <Route
+            path="/perfil"
+            element={
+              <ProtectedRoute>
+                <Perfil />
+              </ProtectedRoute>
+            }
+          />
 
       </Routes>
     </BrowserRouter>
