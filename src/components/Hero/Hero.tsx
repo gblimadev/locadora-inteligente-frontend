@@ -1,4 +1,10 @@
+import { useNavigate } from 'react-router-dom'
+import './Hero.css'
+
 function Hero() {
+
+  const navigate = useNavigate()
+
   return (
     <section className="hero">
 
@@ -25,12 +31,18 @@ function Hero() {
 
         <div className="hero-buttons">
 
-          <button className="primary-button">
+          <button
+            className="primary-button"
+            onClick={() => navigate('/carros')}
+          >
             Encontrar meu carro
             <span>→</span>
           </button>
 
-          <button className="outline-button">
+          <button
+            className="outline-button"
+            onClick={() => navigate('/carros')}
+          >
             Ver veículos
           </button>
 
@@ -69,17 +81,26 @@ function Hero() {
           </div>
 
           <div className="car-image">
-            🚘
+
+            <img
+              src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=90"
+              alt="Carro esportivo moderno"
+            />
+
           </div>
 
           <div className="car-info">
 
             <div>
+
               <span className="car-category">
                 ESPORTIVO
               </span>
 
-              <h2>Seu próximo carro</h2>
+              <h2>
+                Seu próximo carro
+              </h2>
+
             </div>
 
             <div className="car-price">
@@ -89,7 +110,10 @@ function Hero() {
 
           </div>
 
-          <button className="car-button">
+          <button
+            className="car-button"
+            onClick={() => navigate('/carros')}
+          >
             Ver detalhes →
           </button>
 

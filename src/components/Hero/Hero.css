@@ -1,0 +1,794 @@
+/* =========================================
+   HERO - LOCADORA INTELIGENTE
+   ========================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 720px;
+
+    padding: 90px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 50%,
+            rgba(37, 99, 235, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(14, 165, 233, 0.08),
+            transparent 30%
+        ),
+        #020617;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   BACKGROUND
+   ========================================= */
+
+.hero-background {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    top: -180px;
+    left: -280px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    opacity: 0.08;
+
+    filter: blur(120px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CONTEÚDO
+   ========================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 650px;
+}
+
+
+/* =========================================
+   BADGE
+   ========================================= */
+
+.hero-badge {
+    display: inline-flex;
+
+    align-items: center;
+    gap: 9px;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(59, 130, 246, 0.3);
+
+    border-radius: 30px;
+
+    color: #60a5fa;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    background: rgba(37, 99, 235, 0.08);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 20px rgba(37, 99, 235, 0.05);
+}
+
+
+.hero-badge span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #3b82f6;
+
+    box-shadow:
+        0 0 8px #3b82f6,
+        0 0 18px rgba(59, 130, 246, 0.7);
+
+    animation: pulse 2s ease-in-out infinite;
+}
+
+
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.hero h1 {
+    margin-top: 26px;
+
+    font-size: clamp(52px, 6vw, 76px);
+
+    line-height: 0.98;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+}
+
+
+.hero h1 span {
+    color: #3b82f6;
+
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa,
+            #3b82f6,
+            #2563eb
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(
+            0 0 18px rgba(59, 130, 246, 0.25)
+        );
+}
+
+
+/* =========================================
+   DESCRIÇÃO
+   ========================================= */
+
+.hero-content > p {
+    max-width: 570px;
+
+    margin-top: 28px;
+
+    color: #94a3b8;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+
+.hero-buttons {
+    display: flex;
+
+    gap: 14px;
+
+    margin-top: 35px;
+}
+
+
+.primary-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 15px 23px;
+
+    border: 1px solid rgba(147, 197, 253, 0.25);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6,
+            #1d4ed8
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(37, 99, 235, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-position 0.4s ease;
+}
+
+
+.primary-button span {
+    font-size: 18px;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.primary-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(37, 99, 235, 0.4),
+        0 0 25px rgba(59, 130, 246, 0.15);
+}
+
+
+.primary-button:hover span {
+    transform: translateX(4px);
+}
+
+
+.outline-button {
+    padding: 15px 23px;
+
+    border: 1px solid rgba(148, 163, 184, 0.25);
+
+    border-radius: 10px;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.outline-button:hover {
+    border-color: rgba(59, 130, 246, 0.65);
+
+    background: rgba(37, 99, 235, 0.1);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   ESTATÍSTICAS
+   ========================================= */
+
+.hero-stats {
+    display: flex;
+
+    gap: 45px;
+
+    margin-top: 55px;
+}
+
+
+.hero-stats div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.hero-stats strong {
+    color: #f8fafc;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+.hero-stats span {
+    color: #64748b;
+
+    font-size: 12px;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================
+   VISUAL DO CARRO
+   ========================================= */
+
+.hero-visual {
+    position: relative;
+
+    width: 43%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =========================================
+   GLOW AZUL
+   ========================================= */
+
+.glow {
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.45),
+            rgba(37, 99, 235, 0.18),
+            transparent 70%
+        );
+
+    filter: blur(45px);
+
+    animation:
+        carGlow 5s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CARD DO CARRO
+   ========================================= */
+
+.car-card {
+    position: relative;
+
+    z-index: 2;
+
+    width: 420px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(96, 165, 250, 0.2);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(2, 6, 23, 0.96)
+        );
+
+    box-shadow:
+        0 35px 90px rgba(0, 0, 0, 0.55),
+        0 0 45px rgba(37, 99, 235, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(20px);
+
+    animation:
+        carFloating 6s ease-in-out infinite;
+}
+
+
+/* =========================================
+   TOPO DO CARD
+   ========================================= */
+
+.car-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.car-top span:first-child {
+    color: #60a5fa;
+
+    text-shadow:
+        0 0 12px rgba(96, 165, 250, 0.4);
+}
+
+
+/* =========================================
+   IMAGEM DO CARRO
+   ========================================= */
+
+.car-image {
+    position: relative;
+
+    height: 250px;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(37, 99, 235, 0.22),
+            rgba(15, 23, 42, 0.2) 45%,
+            transparent 75%
+        );
+}
+
+
+.car-image::before {
+    content: "";
+
+    position: absolute;
+
+    width: 75%;
+    height: 2px;
+
+    bottom: 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(59, 130, 246, 0.7),
+            transparent
+        );
+
+    filter: blur(2px);
+
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+
+.car-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    mix-blend-mode: screen;
+
+    opacity: 0.9;
+
+    filter:
+        saturate(1.15)
+        contrast(1.08)
+        brightness(0.82);
+
+    transform: scale(1.03);
+
+    transition:
+        transform 0.5s ease,
+        filter 0.5s ease;
+}
+
+
+.car-card:hover .car-image img {
+    transform: scale(1.08);
+
+    filter:
+        saturate(1.25)
+        contrast(1.1)
+        brightness(0.95);
+}
+
+
+/* =========================================
+   INFORMAÇÕES
+   ========================================= */
+
+.car-info {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    padding-top: 14px;
+}
+
+
+.car-category {
+    color: #3b82f6;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.car-info h2 {
+    margin-top: 6px;
+
+    color: #f8fafc;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+.car-price {
+    text-align: right;
+}
+
+
+.car-price strong {
+    color: #ffffff;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+.car-price span {
+    margin-left: 3px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   BOTÃO DO CARD
+   ========================================= */
+
+.car-button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border: 1px solid rgba(59, 130, 246, 0.25);
+
+    border-radius: 10px;
+
+    background:
+        rgba(37, 99, 235, 0.06);
+
+    color: #dbeafe;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.car-button:hover {
+    border-color: rgba(59, 130, 246, 0.7);
+
+    background:
+        rgba(37, 99, 235, 0.14);
+
+    box-shadow:
+        0 0 20px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================
+   ANIMAÇÕES
+   ========================================= */
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.25);
+    }
+}
+
+
+@keyframes carGlow {
+
+    0%,
+    100% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+}
+
+
+@keyframes carFloating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    .hero {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding-top: 70px;
+    }
+
+    .hero-content {
+        max-width: 700px;
+    }
+
+    .hero-content > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons,
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        width: 100%;
+
+        margin-top: 70px;
+    }
+
+    .car-card {
+        width: min(420px, 90vw);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: auto;
+
+        padding: 60px 5% 80px;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+
+        letter-spacing: -2px;
+    }
+
+    .hero-content > p {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .primary-button,
+    .outline-button {
+        width: 100%;
+    }
+
+    .hero-stats {
+        gap: 25px;
+
+        justify-content: space-between;
+    }
+
+    .hero-stats strong {
+        font-size: 19px;
+    }
+
+    .hero-visual {
+        margin-top: 60px;
+    }
+
+    .car-card {
+        width: 100%;
+
+        padding: 17px;
+
+        border-radius: 18px;
+    }
+
+    .car-image {
+        height: 210px;
+    }
+
+    .car-info h2 {
+        font-size: 18px;
+    }
+
+    .glow {
+        width: 280px;
+        height: 280px;
+    }
+}
+
+
+/* =========================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-badge span,
+    .glow,
+    .car-card {
+        animation: none;
+    }
+}

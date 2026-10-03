@@ -1,0 +1,345 @@
+/* =========================================
+   NAVBAR - LOCADORA INTELIGENTE
+   ========================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    width: 100%;
+    height: 76px;
+
+    padding: 0 7%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(2, 6, 23, 0.96),
+            rgba(15, 23, 42, 0.92)
+        );
+
+    border-bottom: 1px solid rgba(59, 130, 246, 0.18);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.28);
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.logo:hover {
+    transform: translateY(-1px);
+    filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.35));
+}
+
+
+/* Ícone L */
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    background:
+        linear-gradient(
+            145deg,
+            #60a5fa,
+            #2563eb 55%,
+            #1d4ed8
+        );
+
+    border: 1px solid rgba(147, 197, 253, 0.45);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 6px 20px rgba(37, 99, 235, 0.4);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(-4deg) scale(1.05);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 0 25px rgba(59, 130, 246, 0.55);
+}
+
+
+/* Ponto azul */
+
+.logo-blue {
+    color: #3b82f6;
+
+    text-shadow:
+        0 0 12px rgba(59, 130, 246, 0.7);
+}
+
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-links a {
+    position: relative;
+
+    padding: 10px 14px;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* Linha azul abaixo */
+
+.nav-links a::after {
+    content: '';
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+    bottom: 5px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.nav-links a:hover {
+    color: #ffffff;
+
+    background:
+        rgba(37, 99, 235, 0.10);
+
+    transform: translateY(-1px);
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* =========================================
+   BOTÃO ENTRAR
+   ========================================= */
+
+.nav-button {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 92px;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6,
+            #1d4ed8
+        );
+
+    background-size: 200% 200%;
+
+    border: 1px solid rgba(147, 197, 253, 0.25);
+
+    box-shadow:
+        0 8px 22px rgba(37, 99, 235, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-position 0.4s ease;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+
+    background-position: 100% 50%;
+
+    box-shadow:
+        0 12px 30px rgba(37, 99, 235, 0.42),
+        0 0 20px rgba(59, 130, 246, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.nav-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .navbar {
+        padding: 0 4%;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links a {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+    .nav-button {
+        min-width: auto;
+        padding: 10px 16px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .navbar {
+        height: 68px;
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 17px;
+        letter-spacing: 1.5px;
+    }
+
+    .logo-icon {
+        width: 27px;
+        height: 27px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-button {
+        padding: 9px 16px;
+        border-radius: 9px;
+    }
+}
+
+
+/* =========================================
+   ACESSIBILIDADE
+   ========================================= */
+
+.nav-links a:focus-visible,
+.nav-button:focus-visible,
+.logo:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .navbar *,
+    .navbar *::before,
+    .navbar *::after {
+        transition: none !important;
+    }
+}

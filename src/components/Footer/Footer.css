@@ -1,0 +1,384 @@
+/* =========================================
+   FOOTER - LOCADORA INTELIGENTE
+   ========================================= */
+
+.footer {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 40px;
+
+    padding: 55px 7% 25px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    color: #cbd5e1;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59, 130, 246, 0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #020617 0%,
+            #0b1226 55%,
+            #0f1f4a 100%
+        );
+
+    border-top: 1px solid rgba(96, 165, 250, 0.18);
+
+    box-shadow:
+        0 -20px 60px -40px rgba(37, 99, 235, 0.35);
+}
+
+
+/* =========================================
+   GRID DECORATIVO
+   ========================================= */
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 40px 40px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            #000,
+            transparent 85%
+        );
+}
+
+
+/* =========================================
+   CONTEÚDO
+   ========================================= */
+
+.footer-content {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+
+/* =========================================
+   MARCA
+   ========================================= */
+
+.footer-brand {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.footer-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   ÍCONE DA MARCA
+   ========================================= */
+
+.logo-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3b82f6,
+            #1d4ed8
+        );
+
+    border: 1px solid rgba(147, 197, 253, 0.35);
+
+    box-shadow:
+        0 8px 20px -8px rgba(37, 99, 235, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================
+   PONTO AZUL
+   ========================================= */
+
+.logo-blue {
+    color: #3b82f6;
+
+    text-shadow:
+        0 0 15px rgba(59, 130, 246, 0.65);
+}
+
+
+/* =========================================
+   DESCRIÇÃO
+   ========================================= */
+
+.footer-brand p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   INFORMAÇÕES
+   ========================================= */
+
+.footer-info {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.footer-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #93c5fd;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #3b82f6;
+
+    box-shadow:
+        0 0 0 4px rgba(59, 130, 246, 0.10),
+        0 0 12px rgba(59, 130, 246, 0.7);
+
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.copyright {
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   LINHA
+   ========================================= */
+
+.footer-line {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 1180px;
+
+    height: 1px;
+
+    margin: 38px auto 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96, 165, 250, 0.22),
+            transparent
+        );
+}
+
+
+/* =========================================
+   PARTE INFERIOR
+   ========================================= */
+
+.footer-bottom {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: #475569;
+
+    font-size: 12px;
+}
+
+.footer-bottom span:last-child {
+    color: #64748b;
+}
+
+
+/* =========================================
+   ANIMAÇÃO STATUS
+   ========================================= */
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+
+        box-shadow:
+            0 0 0 4px rgba(59, 130, 246, 0.10),
+            0 0 12px rgba(59, 130, 246, 0.7);
+    }
+
+    50% {
+        opacity: 0.55;
+
+        box-shadow:
+            0 0 0 7px rgba(59, 130, 246, 0.04),
+            0 0 20px rgba(59, 130, 246, 0.35);
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .footer {
+        padding: 45px 6% 24px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .footer-info {
+        align-items: flex-start;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+        line-height: 1.5;
+    }
+
+}
+
+
+/* =========================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .status-dot {
+        animation: none;
+    }
+
+}
