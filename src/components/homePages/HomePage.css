@@ -1,872 +1,1063 @@
 /* =========================================
-   CARROS PAGE - LOCADORA INTELIGENTE
+   HOME PAGE - LOCADORA INTELIGENTE
    ========================================= */
 
-.carros-page {
-  min-height: 100vh;
-  color: #0f172a;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(circle at 5% 10%, rgba(37, 99, 235, 0.10), transparent 28%),
-    radial-gradient(circle at 95% 90%, rgba(59, 130, 246, 0.08), transparent 30%),
-    linear-gradient(180deg, #f8fafc 0%, #eef4ff 55%, #f8fafc 100%);
+.home {
+    min-height: 100vh;
+
+    color: #ffffff;
+
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 15% 5%,
+            rgba(37, 99, 235, 0.28),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(59, 130, 246, 0.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(29, 78, 216, 0.22),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #020617 0%,
+            #07132f 45%,
+            #0f1f46 100%
+        );
 }
+
 
 /* =========================================
    HEADER
    ========================================= */
 
-.carros-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
+.home-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
 
-  height: 76px;
-  width: 100%;
-  padding: 0 7%;
+    width: 100%;
+    height: 76px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    padding: 0 7%;
 
-  box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  background: rgba(255, 255, 255, 0.84);
+    box-sizing: border-box;
 
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
+    background:
+        rgba(2, 6, 23, 0.78);
 
-  border-bottom: 1px solid #e2e8f0;
+    backdrop-filter:
+        saturate(160%)
+        blur(16px);
 
-  box-shadow:
-    0 10px 24px -18px rgba(15, 23, 42, 0.25);
+    -webkit-backdrop-filter:
+        saturate(160%)
+        blur(16px);
+
+    border-bottom:
+        1px solid
+        rgba(96, 165, 250, 0.16);
+
+    box-shadow:
+        0 10px 30px -18px
+        rgba(37, 99, 235, 0.55);
 }
 
-.carros-logo h1 {
-  position: relative;
 
-  margin: 0;
+/* =========================================
+   LOGO
+   ========================================= */
 
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  color: #0f172a;
-
-  font-size: 20px;
-  font-weight: 800;
-
-  letter-spacing: 2px;
+.home-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.carros-logo h1::before {
-  content: "";
+.brand-mark {
+    width: 30px;
+    height: 30px;
 
-  width: 30px;
-  height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  flex-shrink: 0;
+    flex-shrink: 0;
 
-  border-radius: 9px;
+    border-radius: 9px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #3b82f6,
-      #1d4ed8
-    );
+    color: #ffffff;
 
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 6px 14px -6px rgba(37, 99, 235, 0.7);
+    background:
+        linear-gradient(
+            145deg,
+            #3b82f6,
+            #1d4ed8
+        );
+
+    font-size: 15px;
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.35),
+
+        0 6px 18px -6px
+        rgba(37, 99, 235, 0.85);
 }
 
-.carros-header nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.brand-text h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+    line-height: 1;
 }
 
-.carros-header nav button {
-  border: none;
+.brand-text span {
+    display: block;
 
-  background: transparent;
+    margin-top: 4px;
 
-  color: #475569;
+    color: #93c5fd;
 
-  padding: 10px 14px;
+    font-size: 8px;
+    font-weight: 700;
 
-  border-radius: 8px;
-
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease;
+    letter-spacing: 2px;
 }
 
-.carros-header nav button:hover {
-  color: #1d4ed8;
-  background: #eff6ff;
+
+/* =========================================
+   NAVEGAÇÃO
+   ========================================= */
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.carros-header nav button.active {
-  color: #1d4ed8;
-  background: #eff6ff;
+.home-nav button {
+    border: none;
+    background: transparent;
+
+    color: #cbd5e1;
+
+    padding: 10px 14px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.carros-header .logout-button {
-  margin-left: 12px;
+.home-nav button:hover {
+    color: #ffffff;
 
-  padding: 10px 18px;
-
-  color: #ffffff;
-  background: #0f172a;
-
-  box-shadow:
-    0 6px 14px -8px rgba(15, 23, 42, 0.6);
+    background:
+        rgba(37, 99, 235, 0.18);
 }
 
-.carros-header .logout-button:hover {
-  color: #ffffff;
-  background: #1e293b;
+.home-nav button.active {
+    color: #60a5fa;
 
-  transform: translateY(-1px);
+    background:
+        rgba(37, 99, 235, 0.18);
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(96, 165, 250, 0.08);
 }
+
+.home-nav .logout-button {
+    margin-left: 12px;
+
+    padding: 10px 18px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e293b,
+            #0f172a
+        );
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.15);
+
+    box-shadow:
+        0 8px 20px -10px
+        rgba(0, 0, 0, 0.7);
+}
+
+.home-nav .logout-button:hover {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #334155,
+            #1e293b
+        );
+
+    transform: translateY(-1px);
+}
+
 
 /* =========================================
    CONTEÚDO
    ========================================= */
 
-.carros-content {
-  width: 86%;
-  max-width: 1180px;
+.home-content {
+    width: 86%;
+    max-width: 1180px;
 
-  margin: 0 auto;
+    margin: 0 auto;
 
-  padding: 56px 0 88px;
+    padding: 42px 0 80px;
 }
+
 
 /* =========================================
-   INTRO
+   HERO
    ========================================= */
 
-.carros-intro {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.welcome {
+    position: relative;
 
-  gap: 40px;
+    min-height: 540px;
 
-  margin-bottom: 38px;
+    overflow: hidden;
 
-  animation: carrosIntro 0.6s ease backwards;
+    display: flex;
+    align-items: center;
+
+    border:
+        1px solid
+        rgba(96, 165, 250, 0.20);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #020617,
+            #0f1f46
+        );
+
+    box-shadow:
+        0 30px 70px -35px
+        rgba(0, 0, 0, 0.8),
+
+        0 0 45px -25px
+        rgba(37, 99, 235, 0.55);
+
+    animation:
+        homeEnter 0.7s ease backwards;
 }
 
-.intro-label {
-  display: inline-block;
+.hero-image {
+    position: absolute;
+    inset: 0;
 
-  margin-bottom: 12px;
+    width: 100%;
+    height: 100%;
 
-  color: #2563eb;
+    object-fit: cover;
+    object-position: center;
 
-  font-size: 12px;
-  font-weight: 800;
+    transform: scale(1.02);
 
-  letter-spacing: 2px;
+    transition:
+        transform 1s ease;
 }
 
-.carros-intro h2 {
-  max-width: 720px;
-
-  margin: 0;
-
-  color: #0f172a;
-
-  font-size: clamp(34px, 4vw, 48px);
-
-  line-height: 1.08;
-
-  font-weight: 800;
-
-  letter-spacing: -0.035em;
+.welcome:hover .hero-image {
+    transform: scale(1.05);
 }
 
-.carros-intro h2 span {
-  color: #2563eb;
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(2, 6, 23, 0.96) 0%,
+            rgba(15, 23, 42, 0.90) 24%,
+            rgba(29, 78, 216, 0.68) 48%,
+            rgba(37, 99, 235, 0.28) 75%,
+            rgba(2, 6, 23, 0.55) 100%
+        );
 }
 
-.carros-intro p {
-  max-width: 600px;
+.hero-grid {
+    position: absolute;
+    inset: 0;
 
-  margin: 18px 0 0;
+    opacity: 0.20;
 
-  color: #475569;
+    background-image:
+        linear-gradient(
+            rgba(96, 165, 250, 0.10) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(96, 165, 250, 0.10) 1px,
+            transparent 1px
+        );
 
-  font-size: 16px;
+    background-size: 55px 55px;
 
-  line-height: 1.7;
+    mask-image:
+        linear-gradient(
+            to right,
+            black,
+            transparent 85%
+        );
 }
+
 
 /* =========================================
-   CONTADOR
+   CONTEÚDO DO HERO
    ========================================= */
 
-.fleet-counter {
-  min-width: 150px;
+.welcome-content {
+    position: relative;
+    z-index: 2;
 
-  padding: 18px 22px;
+    width: 58%;
 
-  display: flex;
-  flex-direction: column;
-
-  border: 1px solid rgba(147, 197, 253, 0.55);
-
-  border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.72);
-
-  box-shadow:
-    0 10px 28px -14px rgba(37, 99, 235, 0.18);
-
-  backdrop-filter: blur(10px);
+    padding: 70px;
 }
 
-.fleet-counter strong {
-  color: #1d4ed8;
+.welcome-badge {
+    width: fit-content;
 
-  font-size: 30px;
-  font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-  line-height: 1;
+    margin-bottom: 20px;
+    padding: 7px 11px;
+
+    border:
+        1px solid
+        rgba(96, 165, 250, 0.45);
+
+    border-radius: 999px;
+
+    color: #bfdbfe;
+
+    background:
+        rgba(37, 99, 235, 0.20);
+
+    box-shadow:
+        0 8px 25px -15px
+        rgba(37, 99, 235, 0.8);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
 }
 
-.fleet-counter span {
-  margin-top: 7px;
+.status-dot {
+    width: 7px;
+    height: 7px;
 
-  color: #64748b;
+    border-radius: 50%;
 
-  font-size: 12px;
-  font-weight: 600;
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(34, 197, 94, 0.13);
 }
+
+.welcome-content h2 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(42px, 5vw, 66px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -0.045em;
+}
+
+.welcome-content h2 strong {
+    display: block;
+
+    color: #60a5fa;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 0 30px
+        rgba(59, 130, 246, 0.30);
+}
+
+.welcome-content p {
+    max-width: 520px;
+
+    margin: 24px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
 
 /* =========================================
-   GRID DOS CARROS
+   AÇÕES DO HERO
    ========================================= */
 
-.carros-grid {
-  display: grid;
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 24px;
+    margin-top: 32px;
 }
+
+.primary-button {
+    min-height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #1d4ed8
+        );
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 24px -12px
+        rgba(37, 99, 235, 0.8);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa,
+            #2563eb
+        );
+
+    box-shadow:
+        0 16px 30px -12px
+        rgba(37, 99, 235, 0.9);
+}
+
+.primary-button span {
+    font-size: 18px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.primary-button:hover span {
+    transform: translateX(4px);
+}
+
+.hero-link {
+    padding: 8px 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #e2e8f0;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+}
+
+.hero-link:hover {
+    color: #60a5fa;
+}
+
 
 /* =========================================
-   CARD
+   CARD FLUTUANTE
    ========================================= */
 
-.carro-card {
-  position: relative;
+.hero-floating-card {
+    position: absolute;
+    z-index: 3;
 
-  overflow: hidden;
+    right: 42px;
+    bottom: 42px;
 
-  padding: 28px;
+    min-width: 155px;
 
-  box-sizing: border-box;
+    padding: 18px;
 
-  border: 1px solid rgba(147, 197, 253, 0.55);
+    border:
+        1px solid
+        rgba(96, 165, 250, 0.28);
 
-  border-radius: 20px;
+    border-radius: 14px;
 
-  background: rgba(255, 255, 255, 0.86);
+    background:
+        rgba(2, 6, 23, 0.65);
 
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 18px 40px -22px rgba(37, 99, 235, 0.30);
+    backdrop-filter:
+        blur(14px);
 
-  backdrop-filter: blur(12px);
+    -webkit-backdrop-filter:
+        blur(14px);
 
-  transition:
-    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    box-shadow:
+        0 20px 40px -20px
+        rgba(0, 0, 0, 0.8),
 
-  animation: cardEnter 0.6s ease backwards;
+        0 0 30px -20px
+        rgba(37, 99, 235, 0.7);
 }
 
-.carro-card:nth-child(1) {
-  animation-delay: 0.08s;
+.hero-floating-card span {
+    display: block;
+
+    color: #93c5fd;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
 }
 
-.carro-card:nth-child(2) {
-  animation-delay: 0.14s;
+.hero-floating-card strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 800;
 }
 
-.carro-card:nth-child(3) {
-  animation-delay: 0.20s;
+.hero-floating-card small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #cbd5e1;
+
+    font-size: 10px;
 }
 
-.carro-card:nth-child(4) {
-  animation-delay: 0.26s;
-}
-
-.carro-card:hover {
-  transform: translateY(-6px);
-
-  border-color: #93c5fd;
-
-  box-shadow:
-    0 2px 4px rgba(15, 23, 42, 0.04),
-    0 28px 55px -24px rgba(37, 99, 235, 0.38);
-}
-
-/* Linha superior */
-
-.carro-card::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 3px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #2563eb,
-      #60a5fa,
-      transparent
-    );
-
-  transform: scaleX(0);
-
-  transform-origin: left;
-
-  transition: transform 0.4s ease;
-}
-
-.carro-card:hover::before {
-  transform: scaleX(1);
-}
 
 /* =========================================
-   TOPO DO CARD
+   INTRODUÇÃO
    ========================================= */
 
-.carro-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.section-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
-  margin-bottom: 22px;
+    gap: 50px;
+
+    margin: 82px 0 36px;
 }
 
-.carro-icon {
-  width: 54px;
-  height: 54px;
+.section-tag {
+    display: inline-block;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin-bottom: 12px;
 
-  border: 1px solid #dbeafe;
+    color: #60a5fa;
 
-  border-radius: 14px;
+    font-size: 11px;
+    font-weight: 800;
 
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #eff6ff
-    );
-
-  font-size: 27px;
-
-  box-shadow:
-    inset 0 1px 0 #ffffff,
-    0 7px 16px -8px rgba(37, 99, 235, 0.28);
-
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease;
+    letter-spacing: 2px;
 }
 
-.carro-card:hover .carro-icon {
-  transform: scale(1.06) translateY(-2px);
+.section-intro h2 {
+    max-width: 650px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #eff6ff,
-      #dbeafe
-    );
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(32px, 4vw, 46px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -0.035em;
 }
 
-.carro-status {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  padding: 7px 11px;
-
-  border: 1px solid #bfdbfe;
-
-  border-radius: 999px;
-
-  color: #1d4ed8;
-
-  background: #eff6ff;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  letter-spacing: 0.3px;
+.section-intro h2 span {
+    color: #60a5fa;
 }
 
-.carro-status span {
-  width: 7px;
-  height: 7px;
+.section-intro > p {
+    max-width: 430px;
 
-  border-radius: 50%;
+    margin: 0;
 
-  background: #22c55e;
+    color: #94a3b8;
 
-  box-shadow:
-    0 0 0 3px rgba(34, 197, 94, 0.12);
+    font-size: 14px;
+    line-height: 1.75;
 }
+
 
 /* =========================================
-   NOME DO CARRO
+   CARDS
    ========================================= */
 
-.carro-title span {
-  color: #64748b;
+.home-cards {
+    display: grid;
 
-  font-size: 13px;
-  font-weight: 600;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
 }
 
-.carro-title h3 {
-  margin: 3px 0 4px;
+.home-card {
+    overflow: hidden;
 
-  color: #0f172a;
+    border:
+        1px solid
+        rgba(96, 165, 250, 0.22);
 
-  font-size: 25px;
-  font-weight: 800;
+    border-radius: 20px;
 
-  letter-spacing: -0.025em;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 31, 70, 0.94)
+        );
+
+    box-shadow:
+        0 18px 45px -25px
+        rgba(0, 0, 0, 0.8),
+
+        0 0 30px -22px
+        rgba(37, 99, 235, 0.7);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    animation:
+        cardEnter 0.6s ease backwards;
 }
 
-.carro-title p {
-  margin: 0;
-
-  color: #64748b;
-
-  font-size: 13px;
+.home-card:nth-child(2) {
+    animation-delay: 0.1s;
 }
+
+.home-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 28px 55px -28px
+        rgba(0, 0, 0, 0.9),
+
+        0 0 35px -18px
+        rgba(37, 99, 235, 0.75);
+}
+
 
 /* =========================================
-   ESPECIFICAÇÕES
+   IMAGEM DOS CARDS
    ========================================= */
 
-.carro-specs {
-  display: grid;
+.card-image {
+    position: relative;
 
-  grid-template-columns: repeat(2, 1fr);
+    height: 245px;
 
-  gap: 12px;
+    overflow: hidden;
 
-  margin-top: 24px;
-  padding-top: 20px;
-
-  border-top: 1px solid #e2e8f0;
+    background: #020617;
 }
 
-.spec {
-  display: flex;
-  align-items: center;
+.card-image img {
+    width: 100%;
+    height: 100%;
 
-  gap: 9px;
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
 }
 
-.spec-icon {
-  width: 32px;
-  height: 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 9px;
-
-  background: #eff6ff;
-
-  font-size: 14px;
+.home-card:hover .card-image img {
+    transform: scale(1.06);
 }
 
-.spec div {
-  display: flex;
-  flex-direction: column;
+.card-image-overlay {
+    position: absolute;
+    inset: 0;
 
-  min-width: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(2, 6, 23, 0.05),
+            rgba(2, 6, 23, 0.78)
+        );
 }
 
-.spec small {
-  color: #94a3b8;
+.card-number {
+    position: absolute;
 
-  font-size: 10px;
-  font-weight: 600;
+    top: 18px;
+    right: 18px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
 }
 
-.spec strong {
-  margin-top: 2px;
-
-  overflow: hidden;
-
-  color: #334155;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
 /* =========================================
-   TAGS
+   CONTEÚDO DOS CARDS
    ========================================= */
 
-.carro-tags {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 7px;
-
-  margin-top: 22px;
+.card-content {
+    padding: 27px;
 }
 
-.carro-tags span {
-  padding: 6px 9px;
+.card-label {
+    color: #60a5fa;
 
-  border: 1px solid #dbeafe;
+    font-size: 10px;
+    font-weight: 800;
 
-  border-radius: 7px;
-
-  color: #1d4ed8;
-
-  background: #f8fbff;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  text-transform: capitalize;
+    letter-spacing: 1.7px;
 }
+
+.card-content h3 {
+    margin: 7px 0 8px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    letter-spacing: -0.025em;
+}
+
+.card-content p {
+    max-width: 480px;
+
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.card-content button {
+    margin-top: 21px;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #60a5fa;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.card-content button span {
+    font-size: 17px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.home-card:hover .card-content button span {
+    transform: translateX(4px);
+}
+
 
 /* =========================================
-   FOOTER DO CARD
+   BANNER FINAL
    ========================================= */
 
-.carro-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.home-banner {
+    position: relative;
 
-  gap: 18px;
+    min-height: 280px;
 
-  margin-top: 26px;
-  padding-top: 20px;
+    overflow: hidden;
 
-  border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+
+    margin-top: 82px;
+
+    border:
+        1px solid
+        rgba(96, 165, 250, 0.22);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #020617,
+            #172554,
+            #1e3a8a
+        );
+
+    box-shadow:
+        0 30px 60px -35px
+        rgba(0, 0, 0, 0.85),
+
+        0 0 40px -25px
+        rgba(37, 99, 235, 0.7);
 }
 
-.carro-price {
-  display: flex;
-  flex-direction: column;
+.banner-content {
+    position: relative;
+    z-index: 2;
+
+    padding: 50px;
 }
 
-.carro-price small {
-  color: #94a3b8;
+.banner-content > span {
+    color: #60a5fa;
 
-  font-size: 10px;
-  font-weight: 600;
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
 }
 
-.carro-price strong {
-  margin-top: 3px;
+.banner-content h2 {
+    margin: 12px 0 22px;
 
-  color: #0f172a;
+    color: #ffffff;
 
-  font-size: 21px;
-  font-weight: 800;
+    font-size:
+        clamp(30px, 4vw, 44px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -0.035em;
 }
 
-.carro-price span {
-  margin-top: 1px;
+.banner-content h2 strong {
+    color: #60a5fa;
 
-  color: #64748b;
-
-  font-size: 10px;
+    text-shadow:
+        0 0 25px
+        rgba(59, 130, 246, 0.35);
 }
 
-/* =========================================
-   BOTÃO
-   ========================================= */
+.banner-content button {
+    min-height: 43px;
 
-.reserve-button {
-  min-height: 43px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    padding: 0 16px;
 
-  gap: 8px;
+    border: none;
+    border-radius: 9px;
 
-  padding: 0 16px;
+    color: #ffffff;
 
-  border: none;
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #1d4ed8
+        );
 
-  border-radius: 10px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
 
-  color: #ffffff;
+    cursor: pointer;
 
-  background:
-    linear-gradient(
-      135deg,
-      #2563eb,
-      #1d4ed8
-    );
+    box-shadow:
+        0 9px 20px -10px
+        rgba(37, 99, 235, 0.65);
 
-  font-family: inherit;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 9px 20px -10px rgba(37, 99, 235, 0.65);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.reserve-button:hover:not(:disabled) {
-  transform: translateY(-2px);
+.banner-content button:hover {
+    transform: translateY(-2px);
 
-  background:
-    linear-gradient(
-      135deg,
-      #3b82f6,
-      #2563eb
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa,
+            #2563eb
+        );
 
-  box-shadow:
-    0 14px 25px -10px rgba(37, 99, 235, 0.75);
+    box-shadow:
+        0 14px 25px -10px
+        rgba(37, 99, 235, 0.75);
 }
 
-.reserve-button span {
-  font-size: 17px;
-
-  transition: transform 0.2s ease;
+.banner-content button span {
+    font-size: 17px;
 }
 
-.reserve-button:hover:not(:disabled) span {
-  transform: translateX(4px);
+.banner-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -140px;
+    top: -170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.42),
+            transparent 68%
+        );
+
+    filter: blur(2px);
 }
 
-.reserve-button:disabled {
-  cursor: not-allowed;
-
-  color: #94a3b8;
-
-  background: #e2e8f0;
-
-  box-shadow: none;
-}
-
-/* =========================================
-   LOADING
-   ========================================= */
-
-.carros-loading {
-  min-height: 300px;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 18px;
-}
-
-.carros-loading p {
-  margin: 0;
-
-  color: #64748b;
-
-  font-size: 14px;
-}
-
-.loading-spinner {
-  width: 42px;
-  height: 42px;
-
-  border: 3px solid #dbeafe;
-
-  border-top-color: #2563eb;
-
-  border-radius: 50%;
-
-  animation: spin 0.8s linear infinite;
-}
-
-/* =========================================
-   ERRO
-   ========================================= */
-
-.carros-error,
-.carros-empty {
-  min-height: 300px;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 40px;
-
-  border: 1px solid #e2e8f0;
-
-  border-radius: 20px;
-
-  background: rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 15px 40px -25px rgba(15, 23, 42, 0.25);
-}
-
-.error-icon,
-.empty-icon {
-  width: 58px;
-  height: 58px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 16px;
-
-  border-radius: 16px;
-
-  background: #eff6ff;
-
-  color: #2563eb;
-
-  font-size: 25px;
-  font-weight: 800;
-}
-
-.carros-error h3,
-.carros-empty h3 {
-  margin: 0;
-
-  color: #0f172a;
-
-  font-size: 20px;
-}
-
-.carros-error p,
-.carros-empty p {
-  max-width: 450px;
-
-  margin: 8px 0 20px;
-
-  color: #64748b;
-
-  font-size: 14px;
-
-  line-height: 1.6;
-}
-
-.carros-error button {
-  padding: 11px 18px;
-
-  border: none;
-
-  border-radius: 9px;
-
-  color: #ffffff;
-
-  background: #2563eb;
-
-  font-family: inherit;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-.carros-error button:hover {
-  background: #1d4ed8;
-}
 
 /* =========================================
    ANIMAÇÕES
    ========================================= */
 
-@keyframes carrosIntro {
+@keyframes homeEnter {
 
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes cardEnter {
 
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@keyframes spin {
-
-  to {
-    transform: rotate(360deg);
-  }
-
-}
 
 /* =========================================
    RESPONSIVIDADE
@@ -874,113 +1065,149 @@
 
 @media (max-width: 900px) {
 
-  .carros-header {
-    padding: 0 4%;
-  }
+    .home-header {
+        padding: 0 4%;
+    }
 
-  .carros-content {
-    width: 90%;
-  }
+    .home-content {
+        width: 90%;
+    }
 
-  .carros-intro {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+    .welcome-content {
+        width: 70%;
 
-  .fleet-counter {
-    width: 100%;
-    box-sizing: border-box;
-  }
+        padding: 55px;
+    }
 
-  .carros-grid {
-    grid-template-columns: 1fr;
-  }
+    .hero-floating-card {
+        right: 28px;
+        bottom: 28px;
+    }
 
+    .section-intro {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .home-cards {
+        grid-template-columns: 1fr;
+    }
 }
+
 
 @media (max-width: 650px) {
 
-  .carros-header {
-    height: 68px;
+    .home-header {
+        height: 68px;
 
-    padding: 0 20px;
-  }
+        padding: 0 20px;
+    }
 
-  .carros-logo h1 {
-    gap: 10px;
+    .brand-text h1 {
+        font-size: 17px;
+    }
 
-    font-size: 17px;
+    .brand-text span {
+        font-size: 7px;
+    }
 
-    letter-spacing: 1.5px;
-  }
+    .home-nav button:nth-child(1),
+    .home-nav button:nth-child(2),
+    .home-nav button:nth-child(3) {
+        display: none;
+    }
 
-  .carros-logo h1::before {
-    width: 26px;
-    height: 26px;
+    .home-nav .logout-button {
+        margin-left: 0;
+    }
 
-    border-radius: 8px;
-  }
+    .home-content {
+        width: 92%;
 
-  .carros-header nav button:nth-child(1),
-  .carros-header nav button:nth-child(2),
-  .carros-header nav button:nth-child(3) {
-    display: none;
-  }
+        padding: 28px 0 55px;
+    }
 
-  .carros-header .logout-button {
-    margin-left: 0;
-  }
+    .welcome {
+        min-height: 580px;
 
-  .carros-content {
-    width: 92%;
+        border-radius: 20px;
+    }
 
-    padding: 34px 0 56px;
-  }
+    .hero-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(2, 6, 23, 0.55),
+                rgba(29, 78, 216, 0.72),
+                rgba(2, 6, 23, 0.96)
+            );
+    }
 
-  .carros-intro {
-    margin-bottom: 28px;
-  }
+    .welcome-content {
+        width: 100%;
 
-  .carros-intro h2 {
-    font-size: 34px;
-  }
+        padding: 35px 25px;
 
-  .carros-intro p {
-    font-size: 14px;
-  }
+        align-self: flex-end;
+    }
 
-  .carro-card {
-    padding: 22px;
+    .welcome-content h2 {
+        font-size: 42px;
+    }
 
-    border-radius: 17px;
-  }
+    .welcome-content p {
+        font-size: 14px;
+    }
 
-  .carro-title h3 {
-    font-size: 23px;
-  }
+    .hero-actions {
+        align-items: flex-start;
 
-  .carro-specs {
-    gap: 14px 8px;
-  }
+        flex-direction: column;
 
-  .carro-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
+        gap: 15px;
+    }
 
-  .reserve-button {
-    width: 100%;
-  }
+    .hero-floating-card {
+        display: none;
+    }
 
+    .section-intro {
+        margin-top: 58px;
+    }
+
+    .section-intro h2 {
+        font-size: 34px;
+    }
+
+    .card-image {
+        height: 210px;
+    }
+
+    .card-content {
+        padding: 22px;
+    }
+
+    .home-banner {
+        min-height: 300px;
+
+        margin-top: 58px;
+    }
+
+    .banner-content {
+        padding: 35px 25px;
+    }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
 
-  .carros-page *,
-  .carros-page *::before,
-  .carros-page *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-
+    .home *,
+    .home *::before,
+    .home *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }

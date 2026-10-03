@@ -7,7 +7,7 @@ function Home() {
 
     function sair() {
         localStorage.removeItem('token')
-        navigate('/')
+        navigate('/login')
     }
 
     return (
@@ -16,14 +16,16 @@ function Home() {
             <header className="home-header">
 
                 <div className="home-brand">
+
                     <div className="brand-mark">
                         L
                     </div>
 
-                    <div>
+                    <div className="brand-text">
                         <h1>LOCADORA</h1>
                         <span>SMART MOBILITY</span>
                     </div>
+
                 </div>
 
                 <nav className="home-nav">
@@ -64,17 +66,13 @@ function Home() {
 
                 <section className="welcome">
 
-                    <div className="hero-image">
-
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/6/6d/2020_Bugatti_Chiron_Sport_in_Nocturne_and_Atlantic_Blue%2C_front_left.jpg"
-                            alt="Carro esportivo azul"
-                        />
-
-                    </div>
+                    <img
+                        className="hero-image"
+                        src="https://upload.wikimedia.org/wikipedia/commons/6/6d/2020_Bugatti_Chiron_Sport_in_Nocturne_and_Atlantic_Blue%2C_front_left.jpg"
+                        alt="Carro esportivo azul"
+                    />
 
                     <div className="hero-overlay"></div>
-
                     <div className="hero-grid"></div>
 
                     <div className="welcome-content">
@@ -117,7 +115,7 @@ function Home() {
 
                     <div className="hero-floating-card">
 
-                        <span className="floating-label">
+                        <span>
                             EXPERIÊNCIA
                         </span>
 
@@ -139,6 +137,7 @@ function Home() {
                 <section className="section-intro">
 
                     <div>
+
                         <span className="section-tag">
                             POR QUE LOCADORA?
                         </span>
@@ -147,6 +146,7 @@ function Home() {
                             Mais que um aluguel.
                             <span> Uma experiência.</span>
                         </h2>
+
                     </div>
 
                     <p>
@@ -171,7 +171,7 @@ function Home() {
 
                             <img
                                 src="https://streetglow.com/cdn/shop/files/Audi_RS7_Grey-_Blue_Underglow-_Large_Kit.png?v=1758825852&width=768"
-                                alt="Carro esportivo em ambiente urbano"
+                                alt="Audi RS7"
                             />
 
                             <div className="card-image-overlay"></div>
@@ -208,7 +208,7 @@ function Home() {
 
 
                     <article
-                        className="home-card reservation-card"
+                        className="home-card"
                         onClick={() => navigate('/reservas')}
                     >
 
@@ -216,7 +216,7 @@ function Home() {
 
                             <img
                                 src="https://img.goodfon.com/original/1920x1080/5/3a/rolls-royce-ghost-2021-black-badge-ghost-v12600-l-s-900-nm-n.jpg"
-                                alt="Carro de luxo em ambiente noturno"
+                                alt="Rolls-Royce Ghost"
                             />
 
                             <div className="card-image-overlay"></div>

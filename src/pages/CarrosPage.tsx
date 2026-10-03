@@ -27,87 +27,62 @@ function CarrosPage() {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
+    async function buscarCarros() {
 
-        async function buscarCarros() {
+        try {
 
-            try {
+            setCarregando(true)
+            setErro('')
 
-                setCarregando(true)
-                setErro('')
+            const resposta = await fetch(
+                'http://localhost:8080/carros'
+            )
 
-                const resposta = await fetch('http://localhost:8080/carros')
-
-                if (!resposta.ok) {
-                    throw new Error('Erro ao buscar carros')
-                }
-
-                const dados: Carro[] = await resposta.json()
-
-                const carrosDisponiveis = dados.filter(
-                    carro => carro.disponivel
-                )
-
-                setCarros(carrosDisponiveis)
-
-            } catch (error) {
-
-                console.error(error)
-                setErro('Não foi possível carregar os carros.')
-
-            } finally {
-
-                setCarregando(false)
-
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar carros')
             }
+
+            const dados: Carro[] = await resposta.json()
+
+            const carrosDisponiveis = dados.filter(
+                carro => carro.disponivel === true
+            )
+
+            setCarros(carrosDisponiveis)
+
+        } catch (error) {
+
+            console.error('Erro ao buscar carros:', error)
+
+            setErro(
+                'Não foi possível carregar os carros.'
+            )
+
+        } finally {
+
+            setCarregando(false)
+
         }
+    }
 
+    useEffect(() => {
         buscarCarros()
-
     }, [])
 
     function sair() {
-
         localStorage.removeItem('token')
         navigate('/')
-
     }
 
     function formatarPreco(preco: number) {
-
         return preco.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         })
-
     }
 
-    function obterIcone(carro: Carro) {
-
-        const modelo = carro.modelo.toLowerCase()
-
-        if (modelo.includes('corolla')) {
-            return 'https://cdn-icons-png.flaticon.com/512/741/741407.png'
-        }
-
-        if (modelo.includes('civic')) {
-            return 'https://cdn-icons-png.flaticon.com/512/3097/3097180.png'
-        }
-
-        if (
-            modelo.includes('compass') ||
-            carro.tipo.toLowerCase().includes('suv')
-        ) {
-            return 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png'
-        }
-
-        if (
-            carro.combustivel.toLowerCase().includes('eletric')
-        ) {
-            return 'https://cdn-icons-png.flaticon.com/512/3202/3202926.png'
-        }
-
-        return 'https://cdn-icons-png.flaticon.com/512/741/741407.png'
+    function alugarCarro(id: number) {
+        navigate(`/reservas?carroId=${id}`)
     }
 
     return (
@@ -115,9 +90,18 @@ function CarrosPage() {
 
             <header className="carros-header">
 
-                <div className="brand" onClick={() => navigate('/home')}>
-                    <span className="brand-icon"></span>
-                    <span>LOCADORA</span>
+                <div
+                    className="brand"
+                    onClick={() => navigate('/home')}
+                >
+                    <span className="brand-icon">
+                        L
+                    </span>
+
+                    <span>
+                        LOCADORA
+                        <strong>.</strong>
+                    </span>
                 </div>
 
                 <nav>
@@ -165,8 +149,9 @@ function CarrosPage() {
                         </h1>
 
                         <p>
-                            Escolha entre veículos selecionados para oferecer
-                            conforto, desempenho e praticidade em cada viagem.
+                            Escolha entre veículos selecionados
+                            para oferecer conforto, desempenho
+                            e praticidade em cada viagem.
                         </p>
 
                     </div>
@@ -183,6 +168,7 @@ function CarrosPage() {
                     <div className="section-header">
 
                         <div>
+
                             <span className="section-label">
                                 NOSSA FROTA
                             </span>
@@ -190,14 +176,18 @@ function CarrosPage() {
                             <h2>
                                 Carros disponíveis
                             </h2>
+
                         </div>
 
                         {!carregando && !erro && (
                             <span className="car-count">
+
                                 {carros.length}{' '}
+
                                 {carros.length === 1
                                     ? 'veículo disponível'
                                     : 'veículos disponíveis'}
+
                             </span>
                         )}
 
@@ -217,7 +207,7 @@ function CarrosPage() {
 
                     )}
 
-                    {erro && (
+                    {!carregando && erro && (
 
                         <div className="error-container">
 
@@ -234,9 +224,7 @@ function CarrosPage() {
                                 e tente novamente.
                             </p>
 
-                            <button
-                                onClick={() => window.location.reload()}
-                            >
+                            <button onClick={buscarCarros}>
                                 Tentar novamente
                             </button>
 
@@ -244,191 +232,203 @@ function CarrosPage() {
 
                     )}
 
-                    {!carregando && !erro && carros.length === 0 && (
+                    {!carregando &&
+                        !erro &&
+                        carros.length === 0 && (
 
-                        <div className="empty-container">
+                            <div className="empty-container">
 
-                            <div className="empty-icon">
-                                —
+                                <div className="empty-icon">
+                                    🚗
+                                </div>
+
+                                <h3>
+                                    Nenhum carro disponível
+                                </h3>
+
+                                <p>
+                                    No momento não temos veículos
+                                    disponíveis para locação.
+                                </p>
+
                             </div>
 
-                            <h3>
-                                Nenhum carro disponível
-                            </h3>
+                        )}
 
-                            <p>
-                                No momento não temos veículos disponíveis
-                                para locação.
-                            </p>
+                    {!carregando &&
+                        !erro &&
+                        carros.length > 0 && (
 
-                        </div>
+                            <div className="carros-grid">
 
-                    )}
+                                {carros.map((carro, index) => (
 
-                    {!carregando && !erro && carros.length > 0 && (
+                                    <article
+                                        className="car-card"
+                                        key={carro.id}
+                                        style={{
+                                            animationDelay:
+                                                `${index * 0.08}s`
+                                        }}
+                                    >
 
-                        <div className="carros-grid">
+                                        <div className="car-card-top">
 
-                            {carros.map((carro, index) => (
+                                            <span className="available-badge">
 
-                                <article
-                                    className="car-card"
-                                    key={carro.id}
-                                    style={{
-                                        animationDelay: `${index * 0.08}s`
-                                    }}
-                                >
+                                                <span className="available-dot"></span>
 
-                                    <div className="car-card-top">
+                                                Disponível
 
-                                        <span className="available-badge">
-                                            <span className="available-dot"></span>
-                                            Disponível
-                                        </span>
-
-                                        <span className="car-year">
-                                            {carro.ano}
-                                        </span>
-
-                                    </div>
-
-                                    <div className="car-image-container">
-
-                                        <div className="car-glow"></div>
-
-                                        <img
-                                            src={obterIcone(carro)}
-                                            alt={`${carro.marca} ${carro.modelo}`}
-                                            className="car-icon"
-                                        />
-
-                                    </div>
-
-                                    <div className="car-info">
-
-                                        <span className="car-brand">
-                                            {carro.marca}
-                                        </span>
-
-                                        <h3>
-                                            {carro.modelo}
-                                        </h3>
-
-                                        <span className="car-type">
-                                            {carro.tipo}
-                                        </span>
-
-                                    </div>
-
-                                    <div className="car-specs">
-
-                                        <div className="spec">
-                                            <span className="spec-icon">
-                                                ⚙
                                             </span>
 
-                                            <div>
-                                                <small>Câmbio</small>
-                                                <strong>
-                                                    {carro.cambio}
-                                                </strong>
-                                            </div>
-                                        </div>
-
-                                        <div className="spec">
-                                            <span className="spec-icon">
-                                                ◉
+                                            <span className="car-year">
+                                                {carro.ano}
                                             </span>
 
-                                            <div>
-                                                <small>Combustível</small>
-                                                <strong>
-                                                    {carro.combustivel}
-                                                </strong>
-                                            </div>
                                         </div>
 
-                                        <div className="spec">
-                                            <span className="spec-icon">
-                                                ♙
+                                        <div className="car-image-container">
+
+                                            <div className="car-glow"></div>
+
+                                            <div className="car-placeholder">
+
+                                                <span>
+                                                    {carro.marca}
+                                                </span>
+
+                                                <strong>
+                                                    {carro.modelo}
+                                                </strong>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div className="car-info">
+
+                                            <span className="car-brand">
+                                                {carro.marca}
                                             </span>
 
-                                            <div>
-                                                <small>Lugares</small>
-                                                <strong>
-                                                    {carro.lugares}
-                                                </strong>
-                                            </div>
-                                        </div>
+                                            <h3>
+                                                {carro.modelo}
+                                            </h3>
 
-                                        <div className="spec">
-                                            <span className="spec-icon">
-                                                ▱
+                                            <span className="car-type">
+                                                {carro.tipo}
                                             </span>
 
-                                            <div>
-                                                <small>Porta-malas</small>
-                                                <strong>
-                                                    {carro.portaMalas} L
-                                                </strong>
+                                        </div>
+
+                                        <div className="car-specs">
+
+                                            <div className="spec">
+                                                <span className="spec-icon">
+                                                    ⚙
+                                                </span>
+
+                                                <div>
+                                                    <small>Câmbio</small>
+                                                    <strong>
+                                                        {carro.cambio}
+                                                    </strong>
+                                                </div>
                                             </div>
+
+                                            <div className="spec">
+                                                <span className="spec-icon">
+                                                    ⛽
+                                                </span>
+
+                                                <div>
+                                                    <small>Combustível</small>
+                                                    <strong>
+                                                        {carro.combustivel}
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+                                            <div className="spec">
+                                                <span className="spec-icon">
+                                                    👤
+                                                </span>
+
+                                                <div>
+                                                    <small>Lugares</small>
+                                                    <strong>
+                                                        {carro.lugares}
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+                                            <div className="spec">
+                                                <span className="spec-icon">
+                                                    🧳
+                                                </span>
+
+                                                <div>
+                                                    <small>Porta-malas</small>
+                                                    <strong>
+                                                        {carro.portaMalas} L
+                                                    </strong>
+                                                </div>
+                                            </div>
+
                                         </div>
 
-                                    </div>
+                                        <div className="car-highlights">
 
-                                    <div className="car-highlights">
+                                            <span>
+                                                {carro.nivelDesempenho}
+                                            </span>
 
-                                        <span>
-                                            {carro.nivelDesempenho}
-                                        </span>
+                                            <span>
+                                                {carro.nivelEconomia}
+                                            </span>
 
-                                        <span>
-                                            {carro.nivelEconomia}
-                                        </span>
-
-                                        <span>
-                                            Conforto {carro.nivelConforto}
-                                        </span>
-
-                                    </div>
-
-                                    <div className="car-footer">
-
-                                        <div className="price">
-
-                                            <small>
-                                                Diária a partir de
-                                            </small>
-
-                                            <strong>
-                                                {formatarPreco(
-                                                    carro.precoDiaria
-                                                )}
-                                            </strong>
+                                            <span>
+                                                Conforto {carro.nivelConforto}
+                                            </span>
 
                                         </div>
 
-                                        <button
-                                            className="rent-button"
-                                            onClick={() =>
-                                                navigate(
-                                                    `/reservas?carroId=${carro.id}`
-                                                )
-                                            }
-                                        >
-                                            Alugar
-                                            <span>→</span>
-                                        </button>
+                                        <div className="car-footer">
 
-                                    </div>
+                                            <div className="price">
 
-                                </article>
+                                                <small>
+                                                    Diária a partir de
+                                                </small>
 
-                            ))}
+                                                <strong>
+                                                    {formatarPreco(
+                                                        carro.precoDiaria
+                                                    )}
+                                                </strong>
 
-                        </div>
+                                            </div>
 
-                    )}
+                                            <button
+                                                className="rent-button"
+                                                onClick={() =>
+                                                    alugarCarro(carro.id)
+                                                }
+                                            >
+                                                Alugar
+                                                <span>→</span>
+                                            </button>
+
+                                        </div>
+
+                                    </article>
+
+                                ))}
+
+                            </div>
+
+                        )}
 
                 </section>
 
