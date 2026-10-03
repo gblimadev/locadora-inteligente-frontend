@@ -42,7 +42,7 @@ function Login() {
 
       localStorage.setItem('token', dados.token)
 
-      navigate('/')
+      navigate('/home')
 
     } catch (error) {
 
@@ -103,20 +103,20 @@ function Login() {
 
           </div>
 
-            {erro && (
-              <p
-                className="login-error"
-                  style={{
-                    color: '#dc2626',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    textAlign: 'center',
-                    margin: '10px 0'
-                 }}
-                >
-                {erro}
-              </p>
-            )}
+          {erro && (
+            <p
+              className="login-error"
+              style={{
+                color: '#dc2626',
+                fontSize: '14px',
+                fontWeight: '600',
+                textAlign: 'center',
+                margin: '10px 0'
+              }}
+            >
+              {erro}
+            </p>
+          )}
 
           <button
             type="submit"

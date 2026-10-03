@@ -7,6 +7,7 @@ import CTA from './components/CTA'
 import Footer from './components/Footer'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
+import CarrosPage from './pages/CarrosPage'
 import HomePage from './components/homePages/HomePage'
 import ProtectedRoute from './components/ProtectedRoute'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -40,25 +41,32 @@ function App() {
 
         <Route path="/cadastro" element={<Cadastro />} />
 
-        <Route path="/perfil" element={<Perfil />} />
-
         <Route
           path="/home"
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
-            }
-          />
+          }
+        />
 
-          <Route
-            path="/perfil"
-            element={
-              <ProtectedRoute>
-                <Perfil />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/perfil"
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/carros"
+          element={
+            <ProtectedRoute>
+              <CarrosPage />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>
