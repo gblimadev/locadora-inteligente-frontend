@@ -12,6 +12,7 @@ import HomePage from './components/homePages/HomePage'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Perfil from './components/Perfil/Perfil'
+import ReservasPage from './pages/ReservasPage'
 
 function Home() {
   return (
@@ -64,6 +65,15 @@ function App() {
           element={
             <ProtectedRoute>
               <CarrosPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/reservas"
+          element={
+            <ProtectedRoute>
+            <ReservasPage />
             </ProtectedRoute>
           }
         />

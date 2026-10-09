@@ -1,0 +1,730 @@
+.reservas-page {
+--reserva-bg: #0b1220;
+--reserva-card: #111c30;
+--reserva-border: #26364f;
+--reserva-text: #f1f5f9;
+--reserva-muted: #94a3b8;
+--reserva-blue: #60a5fa;
+
+width: 100%;
+min-height: 100vh;
+padding: 40px clamp(20px, 4vw, 64px) 64px;
+background: var(--reserva-bg);
+color: var(--reserva-text);
+box-sizing: border-box;
+}
+
+.reservas-page *,
+.reservas-page *::before,
+.reservas-page *::after {
+box-sizing: border-box;
+}
+
+/* Cabeçalho */
+
+.reservas-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+margin-bottom: 36px;
+}
+
+.reservas-header-text {
+min-width: 0;
+}
+
+.reservas-eyebrow {
+display: inline-block;
+margin-bottom: 12px;
+color: var(--reserva-blue);
+font-size: 0.73rem;
+font-weight: 800;
+letter-spacing: 1.8px;
+}
+
+.reservas-header h1 {
+margin: 0;
+color: var(--reserva-text);
+font-size: clamp(1.8rem, 3vw, 2.5rem);
+line-height: 1.2;
+letter-spacing: -0.8px;
+}
+
+.reservas-header p {
+margin: 12px 0 0;
+color: var(--reserva-muted);
+font-size: 0.96rem;
+line-height: 1.6;
+}
+
+.reservas-nova-btn,
+.reservas-explorar-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 9px;
+min-height: 46px;
+padding: 0 20px;
+border: 1px solid transparent;
+border-radius: 10px;
+background: #2563eb;
+color: #ffffff;
+font-size: 0.9rem;
+font-weight: 700;
+text-decoration: none;
+white-space: nowrap;
+transition:
+background 0.2s ease,
+transform 0.2s ease,
+border-color 0.2s ease;
+}
+
+.reservas-nova-btn:hover,
+.reservas-explorar-btn:hover {
+background: #1d4ed8;
+transform: translateY(-1px);
+}
+
+.reservas-nova-btn > span {
+font-size: 1.3rem;
+line-height: 1;
+}
+
+/* Indicadores */
+
+.reservas-stats {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 20px;
+margin-bottom: 42px;
+}
+
+.reserva-stat-card {
+display: flex;
+align-items: center;
+gap: 17px;
+min-width: 0;
+padding: 23px;
+border: 1px solid var(--reserva-border);
+border-radius: 16px;
+background: var(--reserva-card);
+}
+
+.reserva-stat-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+flex: 0 0 48px;
+width: 48px;
+height: 48px;
+border-radius: 13px;
+background: #1e3a5f;
+color: #93c5fd;
+font-size: 1.35rem;
+}
+
+.reserva-stat-info {
+display: flex;
+flex-direction: column;
+gap: 5px;
+min-width: 0;
+}
+
+.reserva-stat-info > span {
+color: #cbd5e1;
+font-size: 0.84rem;
+}
+
+.reserva-stat-info strong {
+color: var(--reserva-text);
+font-size: 1.8rem;
+line-height: 1.15;
+}
+
+.reserva-stat-info small {
+color: var(--reserva-muted);
+font-size: 0.75rem;
+}
+
+/* Seção de locações */
+
+.reservas-content {
+min-width: 0;
+}
+
+.reservas-section-heading {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 16px;
+margin-bottom: 23px;
+}
+
+.reservas-section-heading h2 {
+margin: 0;
+color: var(--reserva-text);
+font-size: 1.35rem;
+letter-spacing: -0.3px;
+}
+
+.reservas-section-heading p {
+margin: 8px 0 0;
+color: var(--reserva-muted);
+font-size: 0.9rem;
+line-height: 1.5;
+}
+
+.reservas-contador {
+flex-shrink: 0;
+padding: 7px 12px;
+border: 1px solid var(--reserva-border);
+border-radius: 999px;
+color: #cbd5e1;
+background: #111c30;
+font-size: 0.8rem;
+font-weight: 600;
+}
+
+/* Busca e filtros */
+
+.reservas-toolbar {
+display: grid;
+grid-template-columns: minmax(0, 1fr) 220px;
+gap: 14px;
+margin-bottom: 26px;
+}
+
+.reservas-search {
+display: flex;
+align-items: center;
+gap: 12px;
+min-width: 0;
+min-height: 48px;
+padding: 0 15px;
+border: 1px solid var(--reserva-border);
+border-radius: 11px;
+background: #111c30;
+transition: border-color 0.2s ease;
+}
+
+.reservas-search:focus-within {
+border-color: #3b82f6;
+}
+
+.reservas-search > span {
+flex-shrink: 0;
+color: #94a3b8;
+font-size: 1.5rem;
+line-height: 1;
+}
+
+.reservas-search input {
+width: 100%;
+min-width: 0;
+border: none;
+outline: none;
+background: transparent;
+color: var(--reserva-text);
+font: inherit;
+font-size: 0.88rem;
+}
+
+.reservas-search input::placeholder {
+color: #718198;
+}
+
+.reservas-toolbar select {
+width: 100%;
+min-height: 48px;
+padding: 0 13px;
+border: 1px solid var(--reserva-border);
+border-radius: 11px;
+outline: none;
+background: #111c30;
+color: #e2e8f0;
+font: inherit;
+font-size: 0.86rem;
+cursor: pointer;
+}
+
+.reservas-toolbar select:focus {
+border-color: #3b82f6;
+}
+
+.reservas-toolbar select option {
+background: #111c30;
+color: #e2e8f0;
+}
+
+/* Grade de reservas */
+
+.reservas-lista {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+align-items: stretch;
+gap: 22px;
+}
+
+/* Card individual */
+
+.reserva-card {
+display: flex;
+flex-direction: column;
+min-width: 0;
+padding: 25px;
+border: 1px solid var(--reserva-border);
+border-radius: 17px;
+background: linear-gradient(145deg, #131f34 0%, #0f192b 100%);
+box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+transition:
+border-color 0.2s ease,
+transform 0.2s ease,
+box-shadow 0.2s ease;
+}
+
+.reserva-card:hover {
+border-color: #3b82f6;
+box-shadow: 0 12px 30px rgb(0 0 0 / 20%);
+transform: translateY(-3px);
+}
+
+/* Identificação da reserva */
+
+.reserva-card-header {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 16px;
+margin-bottom: 23px;
+}
+
+.reserva-identificacao {
+display: flex;
+align-items: center;
+gap: 14px;
+min-width: 0;
+}
+
+.reserva-carro-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+flex: 0 0 52px;
+width: 52px;
+height: 52px;
+border: 1px solid #29476d;
+border-radius: 14px;
+background: #192e4b;
+font-size: 1.5rem;
+}
+
+.reserva-identificacao > div:last-child {
+min-width: 0;
+}
+
+.reserva-card-label {
+display: block;
+margin-bottom: 6px;
+color: #7fa7d8;
+font-size: 0.67rem;
+font-weight: 800;
+letter-spacing: 1.3px;
+}
+
+.reserva-card-header h3 {
+margin: 0;
+color: var(--reserva-text);
+font-size: 1.13rem;
+line-height: 1.35;
+overflow-wrap: anywhere;
+}
+
+.reserva-card-subtitle {
+margin: 6px 0 0;
+color: var(--reserva-muted);
+font-size: 0.78rem;
+line-height: 1.5;
+}
+
+/* Status */
+
+.reserva-status {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+gap: 7px;
+max-width: 100%;
+padding: 8px 11px;
+border: 1px solid transparent;
+border-radius: 999px;
+font-size: 0.73rem;
+font-weight: 700;
+line-height: 1.2;
+white-space: nowrap;
+}
+
+.reserva-status-dot {
+width: 7px;
+height: 7px;
+border-radius: 50%;
+background: currentColor;
+}
+
+.status-confirmada {
+border-color: #166534;
+background: rgb(20 83 45 / 35%);
+color: #86efac;
+}
+
+.status-pendente {
+border-color: #854d0e;
+background: rgb(113 63 18 / 35%);
+color: #fde68a;
+}
+
+.status-finalizada {
+border-color: #1d4ed8;
+background: rgb(30 58 138 / 35%);
+color: #bfdbfe;
+}
+
+.status-cancelada {
+border-color: #991b1b;
+background: rgb(127 29 29 / 30%);
+color: #fca5a5;
+}
+
+.status-em_andamento {
+border-color: #6d28d9;
+background: rgb(76 29 149 / 30%);
+color: #c4b5fd;
+}
+
+/* Datas da locação */
+
+.reserva-card-datas {
+display: grid;
+grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+align-items: center;
+gap: 12px;
+padding: 20px 0;
+border-top: 1px solid #26364f;
+border-bottom: 1px solid #26364f;
+}
+
+.reserva-data-item {
+display: flex;
+flex-direction: column;
+gap: 9px;
+min-width: 0;
+}
+
+.reserva-data-label {
+display: flex;
+align-items: center;
+gap: 6px;
+color: #8ba6c8;
+font-size: 0.67rem;
+font-weight: 800;
+letter-spacing: 0.6px;
+}
+
+.reserva-data-label > span {
+color: var(--reserva-blue);
+font-size: 0.9rem;
+}
+
+.reserva-data-item strong {
+color: #e2e8f0;
+font-size: 0.94rem;
+font-weight: 650;
+overflow-wrap: anywhere;
+}
+
+.reserva-data-conector {
+display: flex;
+align-items: center;
+gap: 5px;
+color: #60a5fa;
+}
+
+.reserva-data-conector > span:first-child,
+.reserva-data-conector > span:last-child {
+width: 5px;
+height: 5px;
+border-radius: 50%;
+background: #3b82f6;
+}
+
+.reserva-data-conector > span:nth-child(2) {
+font-size: 1.05rem;
+}
+
+/* Rodapé do card e valor */
+
+.reserva-card-footer {
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
+gap: 12px;
+margin-top: auto;
+padding-top: 21px;
+}
+
+.reserva-valor-info {
+display: flex;
+flex-direction: column;
+gap: 7px;
+min-width: 0;
+}
+
+.reserva-valor-info > span {
+color: var(--reserva-muted);
+font-size: 0.79rem;
+}
+
+.reserva-valor {
+color: #60a5fa;
+font-size: 1.45rem;
+font-weight: 800;
+letter-spacing: -0.4px;
+overflow-wrap: anywhere;
+}
+
+.reserva-card-id {
+flex-shrink: 0;
+padding-bottom: 3px;
+color: #718198;
+font-size: 0.73rem;
+}
+
+/* Estado vazio */
+
+.reservas-empty {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+min-height: 300px;
+padding: 38px 24px;
+border: 1px dashed #34445e;
+border-radius: 17px;
+background: rgb(17 28 48 / 55%);
+text-align: center;
+}
+
+.reservas-empty-icon {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 64px;
+height: 64px;
+margin-bottom: 18px;
+border: 1px solid #29476d;
+border-radius: 20px;
+background: #192e4b;
+font-size: 1.8rem;
+}
+
+.reservas-empty h3 {
+margin: 0;
+color: var(--reserva-text);
+font-size: 1.15rem;
+}
+
+.reservas-empty p {
+max-width: 430px;
+margin: 10px 0 0;
+color: var(--reserva-muted);
+font-size: 0.9rem;
+line-height: 1.7;
+}
+
+.reservas-empty-actions {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+gap: 12px;
+margin-top: 23px;
+}
+
+.reservas-limpar-btn {
+min-height: 44px;
+padding: 0 17px;
+border: 1px solid #3a4b65;
+border-radius: 10px;
+background: transparent;
+color: #dbeafe;
+font: inherit;
+font-size: 0.87rem;
+font-weight: 650;
+cursor: pointer;
+transition: background 0.2s ease;
+}
+
+.reservas-limpar-btn:hover {
+background: #1e293b;
+}
+
+/* Acessibilidade */
+
+.reservas-page a:focus-visible,
+.reservas-page button:focus-visible,
+.reservas-page input:focus-visible,
+.reservas-page select:focus-visible {
+outline: 2px solid #60a5fa;
+outline-offset: 3px;
+}
+
+/* Tablets */
+
+@media (max-width: 1000px) {
+.reservas-page {
+padding-right: 28px;
+padding-left: 28px;
+}
+
+.reservas-stats {
+gap: 14px;
+}
+
+.reserva-stat-card {
+gap: 12px;
+padding: 18px;
+}
+
+.reserva-stat-icon {
+flex-basis: 42px;
+width: 42px;
+height: 42px;
+}
+
+.reservas-lista {
+grid-template-columns: minmax(0, 1fr);
+}
+}
+
+/* Celulares */
+
+@media (max-width: 600px) {
+.reservas-page {
+padding: 28px 16px 44px;
+}
+
+.reservas-header {
+align-items: flex-start;
+flex-direction: column;
+gap: 20px;
+margin-bottom: 28px;
+}
+
+.reservas-nova-btn {
+width: 100%;
+}
+
+.reservas-stats {
+grid-template-columns: minmax(0, 1fr);
+gap: 12px;
+margin-bottom: 32px;
+}
+
+.reserva-stat-card {
+padding: 17px;
+}
+
+.reserva-stat-info strong {
+font-size: 1.55rem;
+}
+
+.reservas-section-heading {
+align-items: flex-start;
+flex-direction: column;
+gap: 12px;
+}
+
+.reservas-toolbar {
+grid-template-columns: minmax(0, 1fr);
+gap: 12px;
+}
+
+.reservas-lista {
+gap: 16px;
+}
+
+.reserva-card {
+padding: 19px;
+}
+
+.reserva-card-header {
+align-items: flex-start;
+flex-direction: column;
+gap: 15px;
+}
+
+.reserva-card-datas {
+gap: 8px;
+padding: 17px 0;
+}
+
+.reserva-data-label {
+font-size: 0.6rem;
+letter-spacing: 0.2px;
+}
+
+.reserva-data-item strong {
+font-size: 0.83rem;
+}
+
+.reserva-valor {
+font-size: 1.28rem;
+}
+}
+
+@media (max-width: 360px) {
+.reserva-card {
+padding: 15px;
+}
+
+.reserva-identificacao {
+gap: 10px;
+}
+
+.reserva-carro-icon {
+flex-basis: 42px;
+width: 42px;
+height: 42px;
+font-size: 1.2rem;
+}
+
+.reserva-card-datas {
+grid-template-columns: minmax(0, 1fr);
+gap: 13px;
+}
+
+.reserva-data-conector {
+display: none;
+}
+
+.reserva-card-footer {
+align-items: flex-start;
+flex-direction: column;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+.reserva-card,
+.reservas-nova-btn,
+.reservas-explorar-btn,
+.reservas-limpar-btn {
+transition: none;
+}
+
+.reserva-card:hover,
+.reservas-nova-btn:hover,
+.reservas-explorar-btn:hover {
+transform: none;
+}
+}
