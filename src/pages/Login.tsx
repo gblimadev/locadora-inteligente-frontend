@@ -1,10 +1,10 @@
+
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Login.css'
 
 function Login() {
-
   const [cpf, setCpf] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState('')
@@ -13,25 +13,21 @@ function Login() {
   const navigate = useNavigate()
 
   async function fazerLogin(event: FormEvent) {
-
     event.preventDefault()
 
     setErro('')
     setCarregando(true)
 
     try {
-
       const resposta = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
-
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-
         body: JSON.stringify({
-          cpf: cpf,
-          senha: senha
-        })
+          cpf,
+          senha,
+        }),
       })
 
       if (!resposta.ok) {
@@ -43,40 +39,62 @@ function Login() {
 
       localStorage.setItem('token', dados.token)
 
+      const respostaUsuario = await fetch(
+        `http://localhost:8080/usuarios/cpf/${encodeURIComponent(cpf)}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${dados.token}`,
+          },
+        },
+      )
+
+      if (!respostaUsuario.ok) {
+        localStorage.removeItem('token')
+        localStorage.removeItem('usuario_id')
+
+        setErro(
+          'Login realizado, mas não foi possível obter os dados do usuário.',
+        )
+        return
+      }
+
+      const usuario = await respostaUsuario.json()
+
+      if (!usuario.id) {
+        localStorage.removeItem('token')
+        localStorage.removeItem('usuario_id')
+
+        setErro('Não foi possível identificar o ID do usuário.')
+        return
+      }
+
+      localStorage.setItem('usuario_id', String(usuario.id))
+
       navigate('/home')
-
     } catch (error) {
-
       console.error(error)
+
+      localStorage.removeItem('token')
+      localStorage.removeItem('usuario_id')
+
       setErro('Erro ao conectar com o servidor')
-
     } finally {
-
       setCarregando(false)
-
     }
   }
 
   return (
     <div className="login-page">
-
       <div className="login-container">
-
         <div className="login-header">
           <h1>LOCADORA</h1>
           <p>Entre na sua conta</p>
         </div>
 
-        <form
-          className="login-form"
-          onSubmit={fazerLogin}
-        >
-
+        <form className="login-form" onSubmit={fazerLogin}>
           <div className="form-group">
-
-            <label htmlFor="cpf">
-              CPF
-            </label>
+            <label htmlFor="cpf">CPF</label>
 
             <input
               type="text"
@@ -85,14 +103,10 @@ function Login() {
               value={cpf}
               onChange={(e) => setCpf(e.target.value)}
             />
-
           </div>
 
           <div className="form-group">
-
-            <label htmlFor="senha">
-              Senha
-            </label>
+            <label htmlFor="senha">Senha</label>
 
             <input
               type="password"
@@ -101,7 +115,6 @@ function Login() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
-
           </div>
 
           {erro && (
@@ -112,7 +125,7 @@ function Login() {
                 fontSize: '14px',
                 fontWeight: '600',
                 textAlign: 'center',
-                margin: '10px 0'
+                margin: '10px 0',
               }}
             >
               {erro}
@@ -126,26 +139,16 @@ function Login() {
           >
             {carregando ? 'Entrando...' : 'Entrar'}
           </button>
-
         </form>
 
         <div className="login-footer">
+          <p>Ainda não possui uma conta?</p>
 
-          <p>
-            Ainda não possui uma conta?
-          </p>
-
-          <Link
-            to="/cadastro"
-            className="register-button"
-          >
+          <Link to="/cadastro" className="register-button">
             Criar conta
           </Link>
-
         </div>
-
       </div>
-
     </div>
   )
 }

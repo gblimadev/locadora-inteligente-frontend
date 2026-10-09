@@ -1,0 +1,590 @@
+
+.nova-reserva-page {
+  --reserva-bg: #080d18;
+  --reserva-surface: #101827;
+  --reserva-surface-light: #151f31;
+  --reserva-border: #263349;
+  --reserva-text: #f2f6ff;
+  --reserva-muted: #98a8bf;
+  --reserva-blue: #3985ff;
+  --reserva-blue-light: #70aaff;
+
+  min-height: 100vh;
+  padding: 48px clamp(20px, 5vw, 76px) 72px;
+  background:
+    radial-gradient(
+      ellipse at 85% 5%,
+      rgba(36, 105, 220, 0.13),
+      transparent 34%
+    ),
+    var(--reserva-bg);
+  color: var(--reserva-text);
+}
+
+.nova-reserva-page *,
+.nova-reserva-page *::before,
+.nova-reserva-page *::after {
+  box-sizing: border-box;
+}
+
+.nova-reserva-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1240px;
+  margin: 0 auto 36px;
+}
+
+.nova-reserva-eyebrow {
+  display: inline-block;
+  color: var(--reserva-blue-light);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.nova-reserva-header h1 {
+  margin: 10px 0 8px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+}
+
+.nova-reserva-header p,
+.nova-reserva-section-title p,
+.nova-reserva-resumo-topo p {
+  margin: 0;
+  color: var(--reserva-muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.nova-reserva-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--reserva-border);
+  border-radius: 10px;
+  color: var(--reserva-text);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.nova-reserva-voltar:hover {
+  border-color: var(--reserva-blue);
+  background: rgba(57, 133, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.nova-reserva-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(290px, 0.85fr);
+  align-items: start;
+  gap: 26px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.nova-reserva-form-card,
+.nova-reserva-resumo {
+  min-width: 0;
+  border: 1px solid var(--reserva-border);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(18, 28, 45, 0.98),
+    rgba(12, 19, 32, 0.98)
+  );
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.15);
+}
+
+.nova-reserva-form-card {
+  padding: clamp(22px, 3vw, 36px);
+}
+
+.nova-reserva-section-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.nova-reserva-number {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(57, 133, 255, 0.35);
+  border-radius: 12px;
+  background: rgba(57, 133, 255, 0.12);
+  color: var(--reserva-blue-light);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.nova-reserva-section-title h2 {
+  margin: 2px 0 6px;
+  font-size: 1.12rem;
+  letter-spacing: -0.02em;
+}
+
+.nova-reserva-section-title p {
+  font-size: 0.85rem;
+}
+
+.nova-reserva-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.nova-reserva-field label {
+  color: #dce6f7;
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.nova-reserva-field select,
+.nova-reserva-field input {
+  width: 100%;
+  min-height: 49px;
+  padding: 0 14px;
+  border: 1px solid #2a3951;
+  border-radius: 10px;
+  outline: none;
+  background: #0b1321;
+  color: var(--reserva-text);
+  font: inherit;
+  font-size: 0.9rem;
+  color-scheme: dark;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.nova-reserva-field select:focus,
+.nova-reserva-field input:focus {
+  border-color: var(--reserva-blue);
+  box-shadow: 0 0 0 3px rgba(57, 133, 255, 0.13);
+}
+
+.nova-reserva-field select:disabled,
+.nova-reserva-field input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.nova-reserva-carro-selecionado {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid rgba(57, 133, 255, 0.23);
+  border-radius: 12px;
+  background: rgba(57, 133, 255, 0.06);
+}
+
+.nova-reserva-carro-icon {
+  display: grid;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border-radius: 12px;
+  background: #172944;
+  font-size: 1.7rem;
+}
+
+.nova-reserva-carro-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.nova-reserva-carro-info > span,
+.nova-reserva-resumo-carro > div > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--reserva-blue-light);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+
+.nova-reserva-carro-info h3 {
+  overflow-wrap: anywhere;
+  margin: 0 0 5px;
+  font-size: 1rem;
+}
+
+.nova-reserva-carro-info p {
+  margin: 0;
+  color: var(--reserva-muted);
+  font-size: 0.77rem;
+  line-height: 1.5;
+}
+
+.nova-reserva-carro-selecionado > strong {
+  flex-shrink: 0;
+  font-size: 0.94rem;
+  text-align: right;
+}
+
+.nova-reserva-carro-selecionado > strong small {
+  display: block;
+  margin-top: 3px;
+  color: var(--reserva-muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.nova-reserva-datas-title {
+  margin-top: 34px;
+}
+
+.nova-reserva-datas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.nova-reserva-periodo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: rgba(57, 133, 255, 0.08);
+  color: #c6d8f5;
+  font-size: 0.85rem;
+}
+
+.nova-reserva-periodo > span {
+  color: var(--reserva-blue-light);
+  font-size: 1.1rem;
+}
+
+.nova-reserva-periodo strong {
+  color: white;
+}
+
+.nova-reserva-mensagem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 13px 14px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.mensagem-erro {
+  border-color: rgba(255, 111, 111, 0.3);
+  background: rgba(255, 70, 70, 0.08);
+  color: #ffaaaa;
+}
+
+.mensagem-sucesso {
+  border-color: rgba(61, 210, 143, 0.3);
+  background: rgba(61, 210, 143, 0.08);
+  color: #8ce6bd;
+}
+
+.nova-reserva-submit {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(110deg, #3478f6, #2866dc);
+  box-shadow: 0 8px 22px rgba(39, 103, 226, 0.2);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 750;
+  transition:
+    filter 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.nova-reserva-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 28px rgba(39, 103, 226, 0.3);
+}
+
+.nova-reserva-submit:focus-visible {
+  outline: 3px solid var(--reserva-blue-light);
+  outline-offset: 3px;
+}
+
+.nova-reserva-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.nova-reserva-aviso {
+  margin: 14px 0 0;
+  color: var(--reserva-muted);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.nova-reserva-resumo {
+  position: sticky;
+  top: 24px;
+  overflow: hidden;
+}
+
+.nova-reserva-resumo-topo {
+  padding: 26px 26px 22px;
+  border-bottom: 1px solid var(--reserva-border);
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(57, 133, 255, 0.14),
+      transparent 65%
+    ),
+    rgba(255, 255, 255, 0.01);
+}
+
+.nova-reserva-resumo-topo h2 {
+  margin: 8px 0 7px;
+  font-size: 1.45rem;
+  letter-spacing: -0.035em;
+}
+
+.nova-reserva-resumo-topo p {
+  font-size: 0.83rem;
+}
+
+.nova-reserva-resumo-carro {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 23px 26px;
+  border-bottom: 1px solid var(--reserva-border);
+}
+
+.nova-reserva-resumo-icone {
+  display: grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 12px;
+  background: #172944;
+  font-size: 1.55rem;
+}
+
+.nova-reserva-resumo-carro > div {
+  min-width: 0;
+}
+
+.nova-reserva-resumo-carro > div > strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.nova-reserva-resumo-linha {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 26px;
+  border-bottom: 1px solid rgba(38, 51, 73, 0.7);
+}
+
+.nova-reserva-resumo-linha > span {
+  color: var(--reserva-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.nova-reserva-resumo-linha > strong {
+  overflow-wrap: anywhere;
+  font-size: 0.82rem;
+  font-weight: 650;
+  text-align: right;
+}
+
+.nova-reserva-resumo-total {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 20px 0;
+  padding: 20px;
+  border: 1px solid rgba(57, 133, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(57, 133, 255, 0.07);
+}
+
+.nova-reserva-resumo-total > span {
+  color: #c2d1e8;
+  font-size: 0.84rem;
+}
+
+.nova-reserva-resumo-total > strong {
+  overflow-wrap: anywhere;
+  color: var(--reserva-blue-light);
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+  letter-spacing: -0.045em;
+}
+
+.nova-reserva-resumo-total > small {
+  color: var(--reserva-muted);
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.nova-reserva-seguranca {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 26px 24px;
+}
+
+.nova-reserva-seguranca > span {
+  color: var(--reserva-blue-light);
+  font-size: 1rem;
+}
+
+.nova-reserva-seguranca p {
+  margin: 0;
+  color: var(--reserva-muted);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .nova-reserva-page {
+    padding-top: 34px;
+  }
+
+  .nova-reserva-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nova-reserva-resumo {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .nova-reserva-page {
+    padding: 28px 16px 44px;
+  }
+
+  .nova-reserva-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .nova-reserva-header h1 {
+    font-size: 2rem;
+  }
+
+  .nova-reserva-voltar {
+    width: 100%;
+  }
+
+  .nova-reserva-form-card {
+    padding: 22px 17px;
+    border-radius: 14px;
+  }
+
+  .nova-reserva-section-title {
+    gap: 11px;
+  }
+
+  .nova-reserva-number {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .nova-reserva-section-title h2 {
+    font-size: 1rem;
+  }
+
+  .nova-reserva-section-title p {
+    font-size: 0.8rem;
+  }
+
+  .nova-reserva-datas-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .nova-reserva-carro-selecionado {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .nova-reserva-carro-info {
+    flex-basis: calc(100% - 70px);
+  }
+
+  .nova-reserva-carro-selecionado > strong {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nova-reserva-resumo-topo,
+  .nova-reserva-resumo-carro {
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+
+  .nova-reserva-resumo-linha {
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+
+  .nova-reserva-resumo-total {
+    margin-right: 14px;
+    margin-left: 14px;
+  }
+
+  .nova-reserva-seguranca {
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nova-reserva-page *,
+  .nova-reserva-page *::before,
+  .nova-reserva-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

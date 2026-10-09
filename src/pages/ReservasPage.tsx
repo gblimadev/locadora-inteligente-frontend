@@ -1,233 +1,294 @@
-import { useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { apiFetch } from '../services/api'
 import './ReservasPage.css'
-import { reservasMock } from '../data/reservasMock'
+
+interface Reserva {
+  id: number
+  dataInicio: string
+  dataFim: string
+  valorTotal: number | string
+  status: string
+  usuario_id: number
+  carro_id: number
+}
 
 function ReservasPage() {
-const [busca, setBusca] = useState('')
-const [statusFiltro, setStatusFiltro] = useState('todas')
+  const [reservas, setReservas] = useState<Reserva[]>([])
+  const [busca, setBusca] = useState('')
+  const [statusFiltro, setStatusFiltro] = useState('todas')
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
 
-const reservasFiltradas = reservasMock.filter((reserva) => {
-const termo = busca.trim().toLowerCase()
+  useEffect(() => {
+    async function buscarReservas() {
+      try {
+        setErro('')
+        const dados = await apiFetch<Reserva[]>('/reservas')
+        setReservas(dados)
+      } catch (error) {
+        setErro(
+          error instanceof Error
+            ? error.message
+            : 'Não foi possível carregar suas reservas.',
+        )
+      } finally {
+        setCarregando(false)
+      }
+    }
 
-const correspondeBusca =
-  termo === '' ||
-  `carro ${reserva.carro_id}`.toLowerCase().includes(termo) ||
-  String(reserva.carro_id).includes(termo) ||
-  String(reserva.id).includes(termo)
+    buscarReservas()
+  }, [])
 
-const correspondeStatus =
-  statusFiltro === 'todas' ||
-  reserva.status.toLowerCase() === statusFiltro
+  const reservasFiltradas = reservas.filter((reserva) => {
+    const termo = busca.trim().toLowerCase()
 
-return correspondeBusca && correspondeStatus
+    const correspondeBusca =
+      termo === '' ||
+      `carro ${reserva.carro_id}`.toLowerCase().includes(termo) ||
+      String(reserva.carro_id).includes(termo) ||
+      String(reserva.id).includes(termo)
 
-})
+    const correspondeStatus =
+      statusFiltro === 'todas' ||
+      reserva.status.toLowerCase() === statusFiltro
 
-const totalReservas = reservasMock.length
+    return correspondeBusca && correspondeStatus
+  })
 
-const totalConfirmadas = reservasMock.filter(
-(reserva) => reserva.status === 'CONFIRMADA',
-).length
+  const totalReservas = reservas.length
 
-const totalConcluidas = reservasMock.filter(
-(reserva) => reserva.status === 'FINALIZADA',
-).length
+  const totalConfirmadas = reservas.filter(
+    (reserva) => reserva.status === 'CONFIRMADA',
+  ).length
 
-function formatarData(data: string) {
-const [ano, mes, dia] = data.split('-')
-return `${dia}/${mes}/${ano}`
-}
+  const totalConcluidas = reservas.filter(
+    (reserva) => reserva.status === 'FINALIZADA',
+  ).length
 
-function formatarStatus(status: string) {
-const nomes: Record<string, string> = {
-PENDENTE: 'Pendente',
-CONFIRMADA: 'Confirmada',
-EM_ANDAMENTO: 'Em andamento',
-FINALIZADA: 'Concluída',
-CANCELADA: 'Cancelada',
-}
+  function formatarData(data: string) {
+    if (!data) return '—'
 
-return nomes[status] ?? status
+    const [ano, mes, dia] = data.split('-')
+    return `${dia}/${mes}/${ano}`
+  }
 
-}
+  function formatarStatus(status: string) {
+    const nomes: Record<string, string> = {
+      PENDENTE: 'Pendente',
+      CONFIRMADA: 'Confirmada',
+      EM_ANDAMENTO: 'Em andamento',
+      FINALIZADA: 'Concluída',
+      CANCELADA: 'Cancelada',
+    }
 
-return ( <main className="reservas-page"> <header className="reservas-header"> <div className="reservas-header-text"> <span className="reservas-eyebrow">ÁREA DO CLIENTE</span> <h1>Minhas Reservas</h1> <p>Acompanhe suas viagens e gerencie suas locações.</p> </div>
+    return nomes[status] ?? status
+  }
 
-    <Link to="/carros" className="reservas-nova-btn">
-      <span aria-hidden="true">+</span>
-      Nova reserva
-    </Link>
-  </header>
+  function formatarMoeda(valor: number | string) {
+    return Number(valor).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    })
+  }
 
-  <section className="reservas-stats" aria-label="Resumo das reservas">
-    <article className="reserva-stat-card">
-      <div className="reserva-stat-icon">🚘</div>
-      <div className="reserva-stat-info">
-        <span>Total de reservas</span>
-        <strong>{totalReservas}</strong>
-        <small>Reservas realizadas</small>
-      </div>
-    </article>
-
-    <article className="reserva-stat-card">
-      <div className="reserva-stat-icon">✓</div>
-      <div className="reserva-stat-info">
-        <span>Confirmadas</span>
-        <strong>{totalConfirmadas}</strong>
-        <small>Reservas confirmadas</small>
-      </div>
-    </article>
-
-    <article className="reserva-stat-card">
-      <div className="reserva-stat-icon">🏁</div>
-      <div className="reserva-stat-info">
-        <span>Concluídas</span>
-        <strong>{totalConcluidas}</strong>
-        <small>Locações finalizadas</small>
-      </div>
-    </article>
-  </section>
-
-  <section className="reservas-content">
-    <div className="reservas-section-heading">
-      <div>
-        <h2>Suas locações</h2>
-        <p>Consulte as datas, os valores e o status de cada reserva.</p>
-      </div>
-
-      <span className="reservas-contador">
-        {reservasFiltradas.length}{' '}
-        {reservasFiltradas.length === 1 ? 'reserva' : 'reservas'}
-      </span>
-    </div>
-
-    <div className="reservas-toolbar">
-      <div className="reservas-search">
-        <span aria-hidden="true">⌕</span>
-        <input
-          type="search"
-          placeholder="Buscar por carro ou número da reserva..."
-          aria-label="Buscar reservas"
-          value={busca}
-          onChange={(event) => setBusca(event.target.value)}
-        />
-      </div>
-
-      <select
-        value={statusFiltro}
-        onChange={(event) => setStatusFiltro(event.target.value)}
-        aria-label="Filtrar reservas por status"
-      >
-        <option value="todas">Todos os status</option>
-        <option value="confirmada">Confirmadas</option>
-        <option value="pendente">Pendentes</option>
-        <option value="em_andamento">Em andamento</option>
-        <option value="finalizada">Concluídas</option>
-        <option value="cancelada">Canceladas</option>
-      </select>
-    </div>
-
-    {reservasFiltradas.length === 0 ? (
-      <div className="reservas-empty">
-        <div className="reservas-empty-icon">🚘</div>
-        <h3>Nenhuma reserva encontrada</h3>
-        <p>
-          Não encontramos reservas para os filtros selecionados.
-          Tente alterar sua busca ou explorar nossos veículos.
-        </p>
-
-        <div className="reservas-empty-actions">
-          <button
-            type="button"
-            className="reservas-limpar-btn"
-            onClick={() => {
-              setBusca('')
-              setStatusFiltro('todas')
-            }}
-          >
-            Limpar filtros
-          </button>
-
-          <Link to="/carros" className="reservas-explorar-btn">
-            Explorar veículos
-          </Link>
+  return (
+    <main className="reservas-page">
+      <header className="reservas-header">
+        <div className="reservas-header-text">
+          <span className="reservas-eyebrow">ÁREA DO CLIENTE</span>
+          <h1>Minhas Reservas</h1>
+          <p>Acompanhe suas viagens e gerencie suas locações.</p>
         </div>
-      </div>
-    ) : (
-      <div className="reservas-lista">
-        {reservasFiltradas.map((reserva) => (
-          <article key={reserva.id} className="reserva-card">
-            <div className="reserva-card-header">
-              <div className="reserva-identificacao">
-                <div className="reserva-carro-icon" aria-hidden="true">
-                  🚘
-                </div>
 
-                <div>
-                  <span className="reserva-card-label">
-                    RESERVA #{reserva.id}
-                  </span>
-                  <h3>Carro #{reserva.carro_id}</h3>
-                  <p className="reserva-card-subtitle">
-                    Sua próxima experiência começa aqui.
-                  </p>
-                </div>
-              </div>
+        <Link to="/nova-reserva" className="reservas-nova-btn">
+          <span aria-hidden="true">+</span>
+          Nova reserva
+        </Link>
+      </header>
 
-              <span
-                className={`reserva-status status-${reserva.status.toLowerCase()}`}
+      <section className="reservas-stats" aria-label="Resumo das reservas">
+        <article className="reserva-stat-card">
+          <div className="reserva-stat-icon">🚘</div>
+          <div className="reserva-stat-info">
+            <span>Total de reservas</span>
+            <strong>{totalReservas}</strong>
+            <small>Reservas realizadas</small>
+          </div>
+        </article>
+
+        <article className="reserva-stat-card">
+          <div className="reserva-stat-icon">✓</div>
+          <div className="reserva-stat-info">
+            <span>Confirmadas</span>
+            <strong>{totalConfirmadas}</strong>
+            <small>Reservas confirmadas</small>
+          </div>
+        </article>
+
+        <article className="reserva-stat-card">
+          <div className="reserva-stat-icon">🏁</div>
+          <div className="reserva-stat-info">
+            <span>Concluídas</span>
+            <strong>{totalConcluidas}</strong>
+            <small>Locações finalizadas</small>
+          </div>
+        </article>
+      </section>
+
+      <section className="reservas-content">
+        <div className="reservas-section-heading">
+          <div>
+            <h2>Suas locações</h2>
+            <p>Consulte as datas, os valores e o status de cada reserva.</p>
+          </div>
+
+          <span className="reservas-contador">
+            {reservasFiltradas.length}{' '}
+            {reservasFiltradas.length === 1 ? 'reserva' : 'reservas'}
+          </span>
+        </div>
+
+        <div className="reservas-toolbar">
+          <div className="reservas-search">
+            <span aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              placeholder="Buscar por carro ou número da reserva..."
+              aria-label="Buscar reservas"
+              value={busca}
+              onChange={(event) => setBusca(event.target.value)}
+            />
+          </div>
+
+          <select
+            value={statusFiltro}
+            onChange={(event) => setStatusFiltro(event.target.value)}
+            aria-label="Filtrar reservas por status"
+          >
+            <option value="todas">Todos os status</option>
+            <option value="confirmada">Confirmadas</option>
+            <option value="pendente">Pendentes</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="finalizada">Concluídas</option>
+            <option value="cancelada">Canceladas</option>
+          </select>
+        </div>
+
+        {carregando ? (
+          <div className="reservas-empty" role="status">
+            <h3>Carregando suas reservas...</h3>
+            <p>Estamos consultando o servidor.</p>
+          </div>
+        ) : erro ? (
+          <div className="reservas-empty" role="alert">
+            <h3>Não foi possível carregar as reservas</h3>
+            <p>{erro}</p>
+            <button
+              type="button"
+              className="reservas-limpar-btn"
+              onClick={() => window.location.reload()}
+            >
+              Tentar novamente
+            </button>
+          </div>
+        ) : reservasFiltradas.length === 0 ? (
+          <div className="reservas-empty">
+            <div className="reservas-empty-icon">🚘</div>
+            <h3>Nenhuma reserva encontrada</h3>
+            <p>
+              Não encontramos reservas para os filtros selecionados.
+              Tente alterar sua busca ou explorar nossos veículos.
+            </p>
+
+            <div className="reservas-empty-actions">
+              <button
+                type="button"
+                className="reservas-limpar-btn"
+                onClick={() => {
+                  setBusca('')
+                  setStatusFiltro('todas')
+                }}
               >
-                <span className="reserva-status-dot" />
-                {formatarStatus(reserva.status)}
-              </span>
+                Limpar filtros
+              </button>
+
+              <Link to="/carros" className="reservas-explorar-btn">
+                Explorar veículos
+              </Link>
             </div>
+          </div>
+        ) : (
+          <div className="reservas-lista">
+            {reservasFiltradas.map((reserva) => (
+              <article key={reserva.id} className="reserva-card">
+                <div className="reserva-card-header">
+                  <div className="reserva-identificacao">
+                    <div className="reserva-carro-icon" aria-hidden="true">
+                      🚘
+                    </div>
 
-            <div className="reserva-card-datas">
-              <div className="reserva-data-item">
-                <span className="reserva-data-label">
-                  <span aria-hidden="true">↗</span> RETIRADA
-                </span>
-                <strong>{formatarData(reserva.dataInicio)}</strong>
-              </div>
+                    <div>
+                      <span className="reserva-card-label">
+                        RESERVA #{reserva.id}
+                      </span>
+                      <h3>Carro #{reserva.carro_id}</h3>
+                      <p className="reserva-card-subtitle">
+                        Sua próxima experiência começa aqui.
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="reserva-data-conector" aria-hidden="true">
-                <span />
-                <span>→</span>
-                <span />
-              </div>
+                  <span
+                    className={`reserva-status status-${reserva.status.toLowerCase()}`}
+                  >
+                    <span className="reserva-status-dot" />
+                    {formatarStatus(reserva.status)}
+                  </span>
+                </div>
 
-              <div className="reserva-data-item">
-                <span className="reserva-data-label">
-                  <span aria-hidden="true">↙</span> DEVOLUÇÃO
-                </span>
-                <strong>{formatarData(reserva.dataFim)}</strong>
-              </div>
-            </div>
+                <div className="reserva-card-datas">
+                  <div className="reserva-data-item">
+                    <span className="reserva-data-label">
+                      <span aria-hidden="true">↗</span> RETIRADA
+                    </span>
+                    <strong>{formatarData(reserva.dataInicio)}</strong>
+                  </div>
 
-            <footer className="reserva-card-footer">
-              <div className="reserva-valor-info">
-                <span>Valor total da locação</span>
-                <strong className="reserva-valor">
-                  {reserva.valorTotal.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </strong>
-              </div>
+                  <div className="reserva-data-conector" aria-hidden="true">
+                    <span />
+                    <span>→</span>
+                    <span />
+                  </div>
 
-              <span className="reserva-card-id">
-                Código #{reserva.id}
-              </span>
-            </footer>
-          </article>
-        ))}
-      </div>
-    )}
-  </section>
-</main>
+                  <div className="reserva-data-item">
+                    <span className="reserva-data-label">
+                      <span aria-hidden="true">↙</span> DEVOLUÇÃO
+                    </span>
+                    <strong>{formatarData(reserva.dataFim)}</strong>
+                  </div>
+                </div>
 
-)
+                <footer className="reserva-card-footer">
+                  <div className="reserva-valor-info">
+                    <span>Valor total da locação</span>
+                    <strong className="reserva-valor">
+                      {formatarMoeda(reserva.valorTotal)}
+                    </strong>
+                  </div>
+
+                  <span className="reserva-card-id">
+                    Código #{reserva.id}
+                  </span>
+                </footer>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
+  )
 }
 
 export default ReservasPage

@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Perfil from './components/Perfil/Perfil'
 import ReservasPage from './pages/ReservasPage'
+import NovaReservaPage from './pages/NovaReservaPage'
 
 function Home() {
   return (
@@ -76,6 +77,11 @@ function App() {
             <ReservasPage />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+          path="/nova-reserva"
+          element={<NovaReservaPage />}
         />
 
       </Routes>
