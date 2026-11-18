@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+
+import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './CarrosPage.css'
 
@@ -19,11 +20,41 @@ interface Carro {
     disponivel: boolean
 }
 
+interface RecomendacaoCarro {
+    dataInicio: string
+    dataFim: string
+    tipo: string
+    modelo: string
+    marca: string
+    combustivel: string
+    cambio: string
+    nivelDesempenho: string
+    nivelEconomia: string
+    nivelConforto: string
+}
+
 function CarrosPage() {
 
     const [carros, setCarros] = useState<Carro[]>([])
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro] = useState('')
+
+    const [carregandoRecomendacao, setCarregandoRecomendacao] = useState(false)
+    const [erroRecomendacao, setErroRecomendacao] = useState('')
+    const [recomendacaoAtiva, setRecomendacaoAtiva] = useState(false)
+
+    const [preferencias, setPreferencias] = useState<RecomendacaoCarro>({
+        dataInicio: '',
+        dataFim: '',
+        tipo: '',
+        modelo: '',
+        marca: '',
+        combustivel: '',
+        cambio: '',
+        nivelDesempenho: '',
+        nivelEconomia: '',
+        nivelConforto: ''
+    })
 
     const navigate = useNavigate()
 
@@ -49,6 +80,7 @@ function CarrosPage() {
             )
 
             setCarros(carrosDisponiveis)
+            setRecomendacaoAtiva(false)
 
         } catch (error) {
 
@@ -85,6 +117,114 @@ function CarrosPage() {
         navigate(`/reservas?carroId=${id}`)
     }
 
+    function atualizarPreferencia(
+        campo: keyof RecomendacaoCarro,
+        valor: string
+    ) {
+        setPreferencias({
+            ...preferencias,
+            [campo]: valor
+        })
+    }
+
+    async function recomendarCarros(event: FormEvent<HTMLFormElement>) {
+
+        event.preventDefault()
+
+        try {
+
+            setCarregandoRecomendacao(true)
+            setErroRecomendacao('')
+
+            const token = localStorage.getItem('token')
+
+            if (!token) {
+                throw new Error(
+                    'Você precisa estar autenticado para utilizar as recomendações.'
+                )
+            }
+
+            const dadosRecomendacao = {
+                dataInicio: preferencias.dataInicio,
+                dataFim: preferencias.dataFim,
+                tipo: preferencias.tipo || null,
+                modelo: preferencias.modelo || null,
+                marca: preferencias.marca || null,
+                combustivel: preferencias.combustivel || null,
+                cambio: preferencias.cambio || null,
+                nivelDesempenho: preferencias.nivelDesempenho || null,
+                nivelEconomia: preferencias.nivelEconomia || null,
+                nivelConforto: preferencias.nivelConforto || null
+            }
+
+            const resposta = await fetch(
+                'http://localhost:8080/carros/recomendar',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(dadosRecomendacao)
+                }
+            )
+
+            if (!resposta.ok) {
+
+                if (resposta.status === 401 || resposta.status === 403) {
+                    throw new Error(
+                        'Sua sessão não é válida ou expirou. Faça login novamente.'
+                    )
+                }
+
+                throw new Error(
+                    'Não foi possível obter as recomendações dos veículos.'
+                )
+            }
+
+            const dados: Carro[] = await resposta.json()
+
+            setCarros(dados)
+            setRecomendacaoAtiva(true)
+
+        } catch (error) {
+
+            console.error('Erro ao recomendar carros:', error)
+
+            if (error instanceof Error) {
+                setErroRecomendacao(error.message)
+            } else {
+                setErroRecomendacao(
+                    'Ocorreu um erro ao buscar as recomendações.'
+                )
+            }
+
+        } finally {
+
+            setCarregandoRecomendacao(false)
+
+        }
+    }
+
+    function limparRecomendacao() {
+
+        setPreferencias({
+            dataInicio: '',
+            dataFim: '',
+            tipo: '',
+            modelo: '',
+            marca: '',
+            combustivel: '',
+            cambio: '',
+            nivelDesempenho: '',
+            nivelEconomia: '',
+            nivelConforto: ''
+        })
+
+        setErroRecomendacao('')
+        buscarCarros()
+    }
+
     return (
         <div className="carros-page">
 
@@ -102,6 +242,7 @@ function CarrosPage() {
                         LOCADORA
                         <strong>.</strong>
                     </span>
+
                 </div>
 
                 <nav>
@@ -163,6 +304,276 @@ function CarrosPage() {
 
                 </section>
 
+                {/* RECOMENDAÇÃO INTELIGENTE */}
+
+                <section className="recomendacao-section">
+
+                    <div className="section-header">
+
+                        <div>
+
+                            <span className="section-label">
+                                ENCONTRE SEU VEÍCULO
+                            </span>
+
+                            <h2>
+                                Recomendação Inteligente
+                            </h2>
+
+                            <p>
+                                Informe suas preferências para encontrar
+                                os veículos mais adequados para você.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <form
+                        className="recomendacao-form"
+                        onSubmit={recomendarCarros}
+                    >
+
+                        <div className="recomendacao-datas">
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="dataInicio">
+                                    Data de retirada
+                                </label>
+
+                                <input
+                                    id="dataInicio"
+                                    type="date"
+                                    value={preferencias.dataInicio}
+                                    onChange={e =>
+                                        atualizarPreferencia(
+                                            'dataInicio',
+                                            e.target.value
+                                        )
+                                    }
+                                    required
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="dataFim">
+                                    Data de devolução
+                                </label>
+
+                                <input
+                                    id="dataFim"
+                                    type="date"
+                                    value={preferencias.dataFim}
+                                    min={preferencias.dataInicio || undefined}
+                                    onChange={e =>
+                                        atualizarPreferencia(
+                                            'dataFim',
+                                            e.target.value
+                                        )
+                                    }
+                                    required
+                                />
+
+                            </div>
+
+                        </div>
+
+                        <div className="recomendacao-preferencias">
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="tipo">
+                                    Tipo de veículo
+                                </label>
+
+                                <input
+                                    id="tipo"
+                                    type="text"
+                                    placeholder="Ex.: SUV, Sedan, Hatch"
+                                    value={preferencias.tipo}
+                                    onChange={e =>
+                                        atualizarPreferencia('tipo', e.target.value)
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="marca">
+                                    Marca
+                                </label>
+
+                                <input
+                                    id="marca"
+                                    type="text"
+                                    placeholder="Ex.: Toyota, Honda"
+                                    value={preferencias.marca}
+                                    onChange={e =>
+                                        atualizarPreferencia('marca', e.target.value)
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="modelo">
+                                    Modelo
+                                </label>
+
+                                <input
+                                    id="modelo"
+                                    type="text"
+                                    placeholder="Ex.: Corolla, Civic"
+                                    value={preferencias.modelo}
+                                    onChange={e =>
+                                        atualizarPreferencia('modelo', e.target.value)
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="combustivel">
+                                    Combustível
+                                </label>
+
+                                <input
+                                    id="combustivel"
+                                    type="text"
+                                    placeholder="Ex.: Flex, Diesel, Elétrico"
+                                    value={preferencias.combustivel}
+                                    onChange={e =>
+                                        atualizarPreferencia('combustivel', e.target.value)
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="cambio">
+                                    Câmbio
+                                </label>
+
+                                <input
+                                    id="cambio"
+                                    type="text"
+                                    placeholder="Ex.: Automático, Manual"
+                                    value={preferencias.cambio}
+                                    onChange={e =>
+                                        atualizarPreferencia('cambio', e.target.value)
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="nivelDesempenho">
+                                    Desempenho
+                                </label>
+
+                                <input
+                                    id="nivelDesempenho"
+                                    type="text"
+                                    placeholder="Informe o nível desejado"
+                                    value={preferencias.nivelDesempenho}
+                                    onChange={e =>
+                                        atualizarPreferencia(
+                                            'nivelDesempenho',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="nivelEconomia">
+                                    Economia
+                                </label>
+
+                                <input
+                                    id="nivelEconomia"
+                                    type="text"
+                                    placeholder="Informe o nível desejado"
+                                    value={preferencias.nivelEconomia}
+                                    onChange={e =>
+                                        atualizarPreferencia(
+                                            'nivelEconomia',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                            </div>
+
+                            <div className="campo-recomendacao">
+
+                                <label htmlFor="nivelConforto">
+                                    Conforto
+                                </label>
+
+                                <input
+                                    id="nivelConforto"
+                                    type="text"
+                                    placeholder="Informe o nível desejado"
+                                    value={preferencias.nivelConforto}
+                                    onChange={e =>
+                                        atualizarPreferencia(
+                                            'nivelConforto',
+                                            e.target.value
+                                        )
+                                    }
+                                />
+
+                            </div>
+
+                        </div>
+
+                        {erroRecomendacao && (
+
+                            <p className="erro-recomendacao">
+                                {erroRecomendacao}
+                            </p>
+
+                        )}
+
+                        <div className="recomendacao-acoes">
+
+                            <button
+                                type="submit"
+                                disabled={carregandoRecomendacao}
+                            >
+                                {carregandoRecomendacao
+                                    ? 'Buscando recomendações...'
+                                    : 'Encontrar meu carro'}
+                            </button>
+
+                            {recomendacaoAtiva && (
+
+                                <button
+                                    type="button"
+                                    onClick={limparRecomendacao}
+                                >
+                                    Limpar recomendação
+                                </button>
+
+                            )}
+
+                        </div>
+
+                    </form>
+
+                </section>
+
                 <section className="carros-section">
 
                     <div className="section-header">
@@ -174,7 +585,9 @@ function CarrosPage() {
                             </span>
 
                             <h2>
-                                Carros disponíveis
+                                {recomendacaoAtiva
+                                    ? 'Carros recomendados para você'
+                                    : 'Carros disponíveis'}
                             </h2>
 
                         </div>

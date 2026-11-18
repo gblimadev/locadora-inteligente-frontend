@@ -1430,3 +1430,399 @@
         opacity: 1;
     }
 }
+
+
+/* =========================================
+   RECOMENDAÇÃO INTELIGENTE
+   ========================================= */
+
+.recomendacao-section {
+    position: relative;
+
+    width: 100%;
+    max-width: 1320px;
+
+    margin: 0 auto;
+
+    padding: 70px 40px;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid rgba(96, 165, 250, 0.12);
+}
+
+
+/* =========================================
+   CABEÇALHO DA RECOMENDAÇÃO
+   ========================================= */
+
+.recomendacao-section .section-header {
+    margin-bottom: 30px;
+}
+
+.recomendacao-section .section-header p {
+    max-width: 650px;
+
+    margin: 15px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   FORMULÁRIO
+   ========================================= */
+
+.recomendacao-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 28px;
+
+    padding: 32px;
+
+    border: 1px solid rgba(96, 165, 250, 0.16);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(8, 18, 38, 0.96)
+        );
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================
+   DATAS
+   ========================================= */
+
+.recomendacao-datas {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid rgba(96, 165, 250, 0.12);
+}
+
+
+/* =========================================
+   PREFERÊNCIAS
+   ========================================= */
+
+.recomendacao-preferencias {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   CAMPOS
+   ========================================= */
+
+.campo-recomendacao {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.campo-recomendacao label {
+    color: #cbd5e1;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 0.03em;
+}
+
+.campo-recomendacao input {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 0 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(96, 165, 250, 0.18);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(2, 6, 23, 0.65);
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.campo-recomendacao input::placeholder {
+    color: #64748b;
+}
+
+.campo-recomendacao input:focus {
+    border-color: #3b82f6;
+
+    background: rgba(2, 6, 23, 0.9);
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.campo-recomendacao input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+
+    filter: invert(1);
+
+    opacity: 0.7;
+}
+
+
+/* =========================================
+   AÇÕES
+   ========================================= */
+
+.recomendacao-acoes {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    padding-top: 8px;
+}
+
+.recomendacao-acoes button {
+    min-height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 22px;
+
+    border: 1px solid transparent;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb
+        );
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.22);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.recomendacao-acoes button:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, 0.32);
+}
+
+.recomendacao-acoes button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.recomendacao-acoes button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   BOTÃO LIMPAR
+   ========================================= */
+
+.recomendacao-acoes button[type="button"] {
+    border-color: rgba(96, 165, 250, 0.2);
+
+    background: rgba(15, 23, 42, 0.8);
+
+    color: #93c5fd;
+
+    box-shadow: none;
+}
+
+.recomendacao-acoes button[type="button"]:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+
+    background: rgba(37, 99, 235, 0.15);
+}
+
+
+/* =========================================
+   ERRO DA RECOMENDAÇÃO
+   ========================================= */
+
+.erro-recomendacao {
+    margin: 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(248, 113, 113, 0.25);
+
+    border-radius: 9px;
+
+    background: rgba(127, 29, 29, 0.15);
+
+    color: #fca5a5;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - TABLET
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+    .recomendacao-section {
+        max-width: none;
+
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .recomendacao-preferencias {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - TABLET MENOR
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .recomendacao-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .recomendacao-form {
+        padding: 25px;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .recomendacao-section {
+        padding: 55px 20px;
+    }
+
+    .recomendacao-form {
+        gap: 23px;
+
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    .recomendacao-datas {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .recomendacao-preferencias {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .recomendacao-acoes {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .recomendacao-acoes button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   ACESSIBILIDADE - RECOMENDAÇÃO
+   ========================================= */
+
+.recomendacao-acoes button:focus-visible {
+    outline: 2px solid #60a5fa;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .campo-recomendacao input,
+    .recomendacao-acoes button {
+        transition: none !important;
+    }
+}
+
