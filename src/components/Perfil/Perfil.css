@@ -1,82 +1,357 @@
+
+/* =========================================
+   PERFIL DO USUÁRIO - LOCADORA INTELIGENTE
+   ========================================= */
+
 .perfil-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  background-color: #f5f7fa;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(29, 78, 216, 0.16),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #020617 0%,
+            #0b1226 50%,
+            #10295f 100%
+        );
 }
+
+/* Elementos decorativos do fundo */
+
+.perfil-container::before,
+.perfil-container::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.perfil-container::before {
+    top: -130px;
+    right: -80px;
+    box-shadow:
+        0 0 0 35px rgba(96, 165, 250, 0.025),
+        0 0 0 70px rgba(96, 165, 250, 0.02);
+}
+
+.perfil-container::after {
+    bottom: -160px;
+    left: -100px;
+    box-shadow:
+        0 0 0 35px rgba(96, 165, 250, 0.025),
+        0 0 0 70px rgba(96, 165, 250, 0.02);
+}
+
+/* =========================================
+   CARD PRINCIPAL
+   ========================================= */
 
 .perfil-card {
-  width: 100%;
-  max-width: 650px;
-  padding: 40px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 720px;
+    padding: 45px;
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.97),
+            rgba(8, 18, 38, 0.97)
+        );
+
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4),
+        0 0 35px rgba(37, 99, 235, 0.08);
+
+    backdrop-filter: blur(18px);
+
+    animation: perfilEntrada 0.7s ease;
 }
+
+/* Linha superior iluminada */
+
+.perfil-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #3b82f6,
+        #60a5fa,
+        transparent
+    );
+
+    border-radius: 50%;
+}
+
+/* =========================================
+   TÍTULO
+   ========================================= */
 
 .perfil-card h1 {
-  margin-bottom: 30px;
-  color: #111111;
-  text-align: center;
+    position: relative;
+    margin: 0 0 38px;
+    padding-bottom: 20px;
+
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    text-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
 }
+
+.perfil-card h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 65px;
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        #1d4ed8,
+        #60a5fa
+    );
+
+    border-radius: 10px;
+}
+
+/* =========================================
+   INFORMAÇÕES DO PERFIL
+   ========================================= */
 
 .perfil-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
 }
 
+/* =========================================
+   CAMPOS
+   ========================================= */
+
 .campo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
 }
 
 .campo label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333333;
+    color: #93c5fd;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
 }
 
 .campo input {
-  padding: 12px;
-  border: 1px solid #d5d5d5;
-  border-radius: 6px;
-  font-size: 15px;
-  outline: none;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 10px;
+
+    background: rgba(2, 6, 23, 0.7);
+
+    color: #f8fafc;
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.campo input::placeholder {
+    color: #64748b;
+}
+
+.campo input:hover {
+    border-color: rgba(96, 165, 250, 0.45);
 }
 
 .campo input:focus {
-  border-color: #0066ff;
+    border-color: #3b82f6;
+
+    background: rgba(15, 23, 42, 0.95);
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.12),
+        0 0 18px rgba(37, 99, 235, 0.1);
 }
 
+/* =========================================
+   BOTÃO SALVAR
+   ========================================= */
+
 .btn-salvar {
-  width: 100%;
-  margin-top: 30px;
-  padding: 13px;
-  border: none;
-  border-radius: 6px;
-  background-color: #0066ff;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+    position: relative;
+    width: 100%;
+    min-height: 52px;
+    margin-top: 35px;
+    padding: 14px 20px;
+
+    border: 1px solid rgba(147, 197, 253, 0.2);
+    border-radius: 11px;
+
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #2563eb,
+        #3b82f6
+    );
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
 .btn-salvar:hover {
-  background-color: #0052cc;
+    transform: translateY(-3px);
+
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 15px 32px rgba(37, 99, 235, 0.38),
+        0 0 20px rgba(59, 130, 246, 0.15);
 }
 
-@media (max-width: 600px) {
-  .perfil-card {
-    padding: 25px;
-  }
-
-  .perfil-info {
-    grid-template-columns: 1fr;
-  }
+.btn-salvar:active {
+    transform: translateY(-1px);
 }
 
+.btn-salvar:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 4px;
+}
+
+/* =========================================
+   ANIMAÇÃO
+   ========================================= */
+
+@keyframes perfilEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 700px) {
+    .perfil-container {
+        padding: 40px 20px;
+    }
+
+    .perfil-card {
+        padding: 32px 25px;
+    }
+
+    .perfil-card h1 {
+        font-size: 26px;
+    }
+
+    .perfil-info {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .perfil-container {
+        padding: 25px 14px;
+    }
+
+    .perfil-card {
+        padding: 27px 20px;
+        border-radius: 17px;
+    }
+
+    .perfil-card h1 {
+        font-size: 23px;
+        margin-bottom: 30px;
+    }
+
+    .campo input {
+        min-height: 46px;
+        font-size: 13px;
+    }
+
+    .btn-salvar {
+        margin-top: 28px;
+    }
+}
+
+/* Acessibilidade: respeita preferência por movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+    .perfil-card {
+        animation: none;
+    }
+
+    .campo input,
+    .btn-salvar {
+        transition: none;
+    }
+}
