@@ -152,19 +152,39 @@
    ========================================= */
 
 .carros-header nav .logout-button {
-    margin-left: 8px;
+    margin-left: 12px;
 
-    color: #f87171;
+    padding: 10px 18px;
 
-    border: 1px solid rgba(248, 113, 113, 0.2);
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e293b,
+            #0f172a
+        );
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.15);
+
+    box-shadow:
+        0 8px 20px -10px
+        rgba(0, 0, 0, 0.7);
 }
 
 .carros-header nav .logout-button:hover {
     color: #ffffff;
 
-    background: #dc2626;
+    background:
+        linear-gradient(
+            135deg,
+            #334155,
+            #1e293b
+        );
 
-    border-color: #dc2626;
+    transform: translateY(-1px);
 }
 
 

@@ -49,6 +49,10 @@ function Home() {
                         Minhas Reservas
                     </button>
 
+                    <button onClick={() => navigate('/perfil')}>
+                        Perfil
+                    </button>
+
                     <button
                         className="logout-button"
                         onClick={sair}

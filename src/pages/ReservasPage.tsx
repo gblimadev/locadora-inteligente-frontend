@@ -102,6 +102,11 @@ function ReservasPage() {
           <p>Acompanhe suas viagens e gerencie suas locações.</p>
         </div>
 
+        <Link to="/carros" className="nova-reserva-voltar">
+          <span aria-hidden="true">←</span>
+          Voltar aos veículos
+        </Link>
+
         <Link to="/nova-reserva" className="reservas-nova-btn">
           <span aria-hidden="true">+</span>
           Nova reserva
